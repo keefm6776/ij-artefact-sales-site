@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-10 col-md-9">
+            {% if artefact.image %}
+                <img class="img-blogpost" url="{{ MEDIA_URL }}{{ artefact.image }}">
+            {% endif %}
+            <h3>{{ artefact.name }}</h3>
+            <div class="row">
+                <div class="col-xs-9">
+                    <p>{{ artefact.description }}</p>
+                    <p>{{ artefact.history }}</p>
+                    <p><span class="boldtext">Date:</span> {{ artefact.century }}+"00 "+ {{ artefact.era }}</p>
+                    <p><span class="boldtext">Tag:</span>"€" + {{ artefact.price }}</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

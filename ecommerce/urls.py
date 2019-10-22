@@ -16,8 +16,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from accounts import urls as urls_accounts
+from artefacts import urls as urls_artefacts
+from artefacts.views import all_artefacts
+from django.views import static
+from .settings import MEDIA_URL
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url('r^$', all_artefacts, name='index'),
     url(r'^accounts/', include(urls_accounts)),
+    url(r'^artefacts/', include(urls_artefacts)),
+     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_URL}),
 ]
