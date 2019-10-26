@@ -1,5 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>Add Artefact........</h1>>
+<h1>Add Artefact........</h1>>
+
+<form method="POST">
+
+	{% csrf_token %}
+
+	<label for="id_name">Name:</label><br>
+	<input type="text" id="id_name" name="name" /><br>
+	<label for="id_history">History:</label><br>
+	<input type="textarea" id="id_history" name="history" /><br>
+	<label for="id_description">Description:</label><br>
+	<input type="textarea" id="id_description" name="description" /><br>
+	<label for="id_century">Century:</label><br>
+	<input type="number" id="id_century" name="century" /><br>
+
+	<select id="id_era" name="era" type="text" required>
+                <option value="" disabled selected>Choose Era</option>
+                <option value="AD" >Anno Domini</option>
+                <option value="BC" >Before Christ</option>
+    </select>
+	<label>Era</label>
+	<script>
+		$('#id_era').find(":selected").val();//OUTPUT:1 OR 2
+    </script>
+
+	<label for="id_image">Artefact Image:</label><br>
+	<input type="file" name="id_image" accept="image/*">
+
+	<label for="id_price">Price:</label><br>
+	<input type="number" id="id_price" name="price" /><br>
+
+	<button type="submit">Save</button>
+</form>
+
 {% endblock %}

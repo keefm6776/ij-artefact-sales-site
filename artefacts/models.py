@@ -13,7 +13,6 @@ class Artefact(models.Model):
     )
     era = models.CharField(max_length=2, choices=ERA_CHOICES)
 
-
     image = models.ImageField(upload_to='images')
     price = models.DecimalField(max_digits=9, decimal_places=2, blank=False)
     sold = models.BooleanField(default=False)
