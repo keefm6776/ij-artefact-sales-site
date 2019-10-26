@@ -1,5 +1,4 @@
-"""ecommerce URL Configuration
-
+"""sell_artefacts URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
 Examples:
@@ -19,16 +18,18 @@ from accounts import urls as urls_accounts
 from artefacts import urls as urls_artefacts
 from cart import urls as urls_cart
 from search import urls as urls_search
+from checkout import urls as urls_checkout
 from artefacts.views import all_artefacts
 from django.views import static
 from .settings import MEDIA_URL
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('r^$', all_artefacts, name='index'),
+    url(r'^$', all_artefacts, name='index'),
     url(r'^accounts/', include(urls_accounts)),
     url(r'^artefacts/', include(urls_artefacts)),
     url(r'^cart/', include(urls_cart)),
+    url(r'^checkout/', include(urls_checkout)),
     url(r'^search/', include(urls_search)),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_URL}),
 ]
