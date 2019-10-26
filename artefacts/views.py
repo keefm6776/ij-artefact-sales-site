@@ -12,3 +12,7 @@ def artefact_detail(request, pk):
     """ Displays all the artefact details to the user """
     artefact = get_object_or_404(Artefact, pk=pk)
     return render(request, "artefact_detail.html", {"artefact" : artefact})
+
+def add_artefact(request):
+    """ Allows Site Owner To Add New Artefact To Sell """
+    return render(request, "add_artefact.html")
