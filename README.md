@@ -1,7 +1,1 @@
-# Code Institute
-
-Welcome keefm6776,
-
-We have preinstalled all of the tools you need to get started.
-
-Happy coding!
+[![Build Status](https://www.travis-ci.org/keefm6776/ij-artefact-sales-site.svg?branch=master)](https://www.travis-ci.org/keefm6776/ij-artefact-sales-site)
