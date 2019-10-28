@@ -33,11 +33,11 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-                    {% if user.is_staff %}
-                    <li><a href="{% url 'add_artefact' %}"><i class="fa fa-plus-circle"></i> Add</a></li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <li>
+					{% if user.is_staff %}
+					<li><a href="{% url 'add_artefact' %}"><i class="fa fa-plus-circle"></i> Add</a></li>
+					{% endif %}
+					{% if user.is_authenticated %}
+					<li>
 						<a href="{% url 'view_cart' %}">
 							<i class="fa fa-shopping-cart"></i> Cart
 							{% if item_count > 0 %}
@@ -60,29 +60,39 @@
 	<div class="row">
 		<div class="indiana-container col-xs-12 col-md-6-offset-3 img-responsive center-block text-center">
 			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:60%;" />
+</head>
 
-		{% if user.is_authenticated %}
-			<div class="container">
-				<div class="display">
-					<form action="{% url 'search' %}" method="get">
-						<input type="text" name="q">
-						<button type="search">Search</button>
-					</form>
+			<body>
+
+				{% if user.is_authenticated %}
+				<div class="container">
+					<div class="display">
+						<form name="ArtefactSearch" onsubmit="return validateForm()" action="{% url 'search' %}"
+							method="get">
+							Name: <input type="text" label = "artefact name" name="artefact_name">
+                        Century >= <input type="number" label = "century" name="low_artefact_century" value="0">
+                        Century <= <input type="number" label="century" name="high_artefact_century" value="50000">
+								Era:<select type="text" label = "era" name="artefact_era">
+                            <option value="AD">AD</option>
+                            <option value="BC">BC</option>
+                        </select>
+								<button type="search">Search</button>
+						</form>
+					</div>
 				</div>
-			</div>
-			{% else %}
+				{% else %}
 
-			<div class="text-block">
-				<h1>Indiana Jones Is Retiring!</h1>
-				<p>
-					<h3>& he is putting his collection of Artefacts up for Sale.</h3>
-				</p>
-				<p>
-					<h3>To Bid or Buy, Register Or Log In.</h3>
-				</p>
-			</div>
-			<a href="{% url 'register' %}" class="btn btn-primary" role="button">Register</a>
-			<a href="{% url 'login' %}" class="btn btn-success" role="button">Log In</a>
+				<div class="text-block">
+					<h1>Indiana Jones Is Retiring!</h1>
+					<p>
+						<h3>& he is putting his collection of Artefacts up for Sale.</h3>
+					</p>
+					<p>
+						<h3>To Bid or Buy, Register Or Log In.</h3>
+					</p>
+				</div>
+				<a href="{% url 'register' %}" class="btn btn-primary" role="button">Register</a>
+				<a href="{% url 'login' %}" class="btn btn-success" role="button">Log In</a>
 		</div>
 		{% endif %}
 	</div>
