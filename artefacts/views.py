@@ -6,7 +6,7 @@ from .forms import ArtefactForm
 
 def all_artefacts(request):
     """ Finds all artefacts in the database and displays them """
-    artefacts = Artefact.objects.all()
+    artefacts = Artefact.objects.filter(sold=False)
     return render(request, "artefacts.html", {"artefacts": artefacts})
 
 def artefact_detail(request, pk):

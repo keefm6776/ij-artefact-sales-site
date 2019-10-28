@@ -4,20 +4,21 @@
 {% if user.is_authenticated %}
 <div class="row row-flex">
 	{% for artefact in artefacts %}
+
 	<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
 		<div class="panel-body">
 			<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
 
 			<h3>{{ artefact.name }}</h3>
-			<p class="artefact-description">{{ artefact.description|truncatewords:30 }}</p>
-            <p><a href="{% url 'artefact_detail' artefact.id %}"  class="btn btn-default">Read more</a></p>
+			<p class="artefact-description">{{ artefact.description|truncatewords:20 }}</p>
+			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
 			<p>{{ artefact.price }}</p>
 
 			{% if user.is_staff %}
-                <p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Edit</a></p>
+			<p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Edit</a></p>
 
-            {% else %}
-            <form method="post" action="{% url 'add_to_cart' artefact.id %}">
+			{% else %}
+			<form method="post" action="{% url 'add_to_cart' artefact.id %}">
 				{% csrf_token %}
 				<div class="input-group">
 					<input name="quantity" type="number" min="0" max="1" class="form-control" placeholder="Quantity">
@@ -26,11 +27,13 @@
                         </span>
 				</div>
 			</form>
-            {% endif %}
+			{% endif %}
 
 		</div>
 	</div>
+
 	{% endfor %}
 </div>
+
 {% endif %}
 {% endblock %}

@@ -33,29 +33,11 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					{% if user.is_authenticated %}
-					<li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile</a></li>
-					<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
-					{% if user.is_staff %}
-					<div class="btn-group">
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ADMIN
-                        </button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="{% url 'add_artefact' %}">Add Artefact</a>
-							<!--<a class="dropdown-item" href="#">Another action</a>
-							<a class="dropdown-item" href="#">Something else here</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>-->
-						</div>
-					</div>
-
-					{% endif %}
-					{%  else %}
-					<li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a></li>
-					<li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a></li>
-					{% endif %}
-					<li>
+                    {% if user.is_staff %}
+                    <li><a href="{% url 'add_artefact' %}"><i class="fa fa-plus-circle"></i> Add</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li>
 						<a href="{% url 'view_cart' %}">
 							<i class="fa fa-shopping-cart"></i> Cart
 							{% if item_count > 0 %}
@@ -63,6 +45,13 @@
 							{% endif %}
 						</a>
 					</li>
+					<li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile</a></li>
+					<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
+					{%  else %}
+					<li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a></li>
+					<li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a></li>
+					{% endif %}
+
 				</ul>
 			</div>
 		</div>
