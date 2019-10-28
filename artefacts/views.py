@@ -26,10 +26,19 @@ def add_artefact(request):
             return redirect(all_artefacts)
     return render(request, "add_artefact.html", {'form': form})
 
-def edit_artefact_detail(request, pk):
+def edit_artefact_detail(request, id):
     """ Displays the selected Artefact to the Site Owner for editing """
-    artefact = get_object_or_404(Artefact, pk=pk)
+    artefact = get_object_or_404(Artefact, pk=id)
     form = ArtefactForm(instance=artefact)
+
+    if request.method == "POST":
+        form = ArtefactForm(request.POST, instance=artefact)
+        if form.is_valid():
+            form.save()
+            return redirect(all_artefacts)
+    else:
+        form = ArtefactForm(instance=artefact)
+
     return render(request, "edit_artefact_detail.html", {'form': form})
 
 def delete_artefact(request, pk):

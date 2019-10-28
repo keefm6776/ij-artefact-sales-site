@@ -14,11 +14,8 @@
 			<p>{{ artefact.price }}</p>
 
 			{% if user.is_staff %}
-                <a href="{% url 'edit_artefact_detail' artefact.id %}" class="waves-effect waves-light btn btn_small blue">Edit</a>
-                <a href="{% url 'delete_artefact' artefact.id %}" class="waves-effect waves-light btn btn_small red">Delete</a>
+                <p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Edit</a></p>
 
-                <!--<button class="btn btn-success" type="submit">Edit</button>
-                <button class="btn btn-danger" type="submit">Delete</button>-->
             {% else %}
             <form method="post" action="{% url 'add_to_cart' artefact.id %}">
 				{% csrf_token %}
