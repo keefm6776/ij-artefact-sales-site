@@ -9,7 +9,6 @@ class Customer(models.Model):
     country = models.CharField(max_length=40, default='')
     postcode = models.CharField(max_length=20, default='')
     phone_number = models.CharField(max_length=20, default='')
-    email = models.CharField(max_length=254, default='')
 
     def __str__(self):
         return self.name

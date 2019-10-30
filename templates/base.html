@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -58,7 +59,7 @@
 	</nav>
 
 	<div class="row">
-		<div class="indiana-container col-xs-12 col-md-6-offset-3 img-responsive center-block text-center">
+		<div id="indiana-container" class="col-xs-12 col-md-6-offset-3 img-responsive center-block text-center">
 			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:60%;" />
 </head>
 
@@ -66,17 +67,19 @@
 
 				{% if user.is_authenticated %}
 				<div class="container">
-					<div class="display">
-						<form name="ArtefactSearch" onsubmit="return validateForm()" action="{% url 'search' %}"
+					<div class="ArtefactSearch-Container" class="display">
+						<form name="ArtefactSearch" action="{% url 'search' %}"
 							method="get">
-							Name: <input type="text" label = "artefact name" name="artefact_name">
-                        Century >= <input type="number" label = "century" name="low_artefact_century" value="0">
-                        Century <= <input type="number" label="century" name="high_artefact_century" value="50000">
-								Era:<select type="text" label = "era" name="artefact_era">
-                            <option value="AD">AD</option>
-                            <option value="BC">BC</option>
-                        </select>
-								<button type="search">Search</button>
+							<p>Name: <input type="text" label = "artefact name" name="artefact_name"></p>
+                            <p>Centuries Between <input type="number" min="0" label = "century" name="low_artefact_century" value="0"> And
+                            <input type="number" label="century" min="0" name="high_artefact_century" value="50000"></p>
+							<p>Era:
+                            <select type="text" label="era" name="artefact_era"></p>
+                                <option value=""></option>
+                                <option value="AD">AD</option>
+                                <option value="BC">BC</option>
+                            </select>
+							<p><button type="search">Search</button></p>
 						</form>
 					</div>
 				</div>

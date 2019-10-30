@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from customer.models import Customer
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
@@ -8,7 +9,10 @@ class UserLoginForm(forms.Form):
     username_or_email = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ('full_name', 'street_Address1', 'street_Address2', 'town_or_city', 'county', 'country', 'postcode', 'phone_number')
 
 class UserRegistrationForm(UserCreationForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
