@@ -50,7 +50,8 @@ def checkout(request):
                 messages.error(request, "You have successfully paid")
                 request.session['cart'] = {}
                 artefact.sold = True
-                return redirect(reverse('artefacts'))
+                artefact.save()
+                return redirect(reverse('artefact'))
             else:
                 messages.error(request, "Unable to take payment")
         else:
