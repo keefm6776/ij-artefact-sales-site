@@ -1,6 +1,6 @@
 from django.db import models
 from artefacts.models import Artefact
-#from customer.models import Customer
+from customer.models import Customer
 
 # Adapted from Course Instiute Notes
 
@@ -15,10 +15,10 @@ class Order(models.Model):
     delivery_postcode = models.CharField(max_length=20, blank=True)
     delivery_phone_number = models.CharField(max_length=20, blank=False)
     delivery_email = models.CharField(max_length=254, blank=False)
-    #customer_id = models.ForeignKey(Customer, null=False)
+    customer_id = models.ForeignKey(Customer, null=False, default='')
 
     def __str__(self):
-        return "{0}-{1}-{2}".format(self.id, self.date, self.full_name)
+        return "{0}-{1}-{2}".format(self.id, self.date, self.delivery_full_name)
 
 
 class OrderLineItem(models.Model):
