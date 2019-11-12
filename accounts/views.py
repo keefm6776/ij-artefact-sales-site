@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages, auth
+from django.views.generic import DetailView, FormView
 from django.core.urlresolvers import reverse
-from .forms import UserLoginForm, UserRegistrationForm, CustomerForm
+from .forms import UserLoginForm, UserRegistrationForm
+from customer.models import Customer
+from customer.forms import CustomerForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
@@ -50,16 +53,16 @@ def profile(request):
     """A view that displays the profile page of a logged in user"""
     return render(request, 'profile.html')
 
-
 def register(request):
     """A view that manages the registration form"""
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         customer_form = CustomerForm(request.POST)
+
         if user_form.is_valid() and customer_form.is_valid():
             user_form.save()
-            customer_form.save()
-
+            #customer_form.save()
+                        
             user = auth.authenticate(request.POST.get('email'),
                                      password=request.POST.get('password1'))
 
@@ -77,3 +80,5 @@ def register(request):
     args = {'user_form': user_form, 'customer_form' : customer_form}
     return render(request, 'register.html', args)
 
+class CustomerDetailView(DetailView):
+    model=Customer

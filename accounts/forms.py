@@ -9,6 +9,9 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 class UserRegistrationForm(UserCreationForm):
+    street_Address1 = forms.CharField()
+    street_Address2 = forms.CharField()
+    full_name = forms.CharField()
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Password Confirmation',
@@ -37,8 +40,3 @@ class UserRegistrationForm(UserCreationForm):
             raise ValidationError("Passwords do not match")
 
         return password2
-
-class CustomerForm(forms.ModelForm):
-    class Meta:
-        model = Customer
-        fields = ('full_name', 'street_Address1', 'street_Address2', 'town_or_city', 'county', 'country', 'postcode', 'phone_number')

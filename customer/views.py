@@ -6,7 +6,7 @@ from accounts.forms import UserRegistrationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-class CreateProfileView(FormView):
+class CreateCustomerView(FormView):
     template_name = 'register.html'
     form_class = UserRegistrationForm
 
@@ -14,7 +14,7 @@ class CreateProfileView(FormView):
         data = form.cleaned_data
         user = User.objects.create_user(username=data['username'],
                                         password=data['password'],
-                                        email=data['email']
+                                        email=data['email'],
                                         )
         user.customer.full_name = data['full_name']
         user.customer.street_Address1 = data['street_Address1']
@@ -26,8 +26,9 @@ class CreateProfileView(FormView):
         user.customer.phone_number = data['phone_number']
         user.customer.email = data['email']
         user.save()
+        user.customer.save()
 
         return HttpResponse('ok')
 
-class DisplayDetailView(DetailView):
+class CustomerDetailView(DetailView):
     model = Customer

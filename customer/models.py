@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default='')
+    user = models.OneToOneField(User, related_name='customer',on_delete=models.CASCADE)
     full_name = models.CharField(max_length=60, default='')
     street_Address1 = models.CharField(max_length=40, default='')
     street_Address2 = models.CharField(max_length=40, default='')
@@ -23,8 +23,8 @@ class Customer(models.Model):
 @receiver(post_save, sender=User)
 def create_customer_profile(sender, instance, created, **kwargs):
     if created:
-        Customer.objects.create(user=instance)
+       Customer.objects.create(user=instance).save()
 
 @receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
+def save_customer_profile(sender, instance, **kwargs):
     instance.customer.save()
