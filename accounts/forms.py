@@ -9,9 +9,6 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 class UserRegistrationForm(UserCreationForm):
-    street_Address1 = forms.CharField()
-    street_Address2 = forms.CharField()
-    full_name = forms.CharField()
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Password Confirmation',

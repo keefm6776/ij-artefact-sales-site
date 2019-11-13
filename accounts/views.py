@@ -58,11 +58,10 @@ def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         customer_form = CustomerForm(request.POST)
-
-        if user_form.is_valid() and customer_form.is_valid():
+        
+        if user_form.is_valid():
             user_form.save()
-            #customer_form.save()
-                        
+                                    
             user = auth.authenticate(request.POST.get('email'),
                                      password=request.POST.get('password1'))
 
