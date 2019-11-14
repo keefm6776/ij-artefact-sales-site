@@ -7,6 +7,7 @@ from customer.models import Customer
 from customer.forms import CustomerForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 
 # Create your views here.
@@ -48,11 +49,8 @@ def login(request):
     return render(request, 'login.html', args)
 
 
-@login_required
-def profile(request):
-    """A view that displays the profile page of a logged in user"""
-    return render(request, 'profile.html')
-
+#@login_required
+@transaction.atomic
 def register(request):
     """A view that manages the registration form"""
     if request.method == 'POST':
@@ -61,12 +59,20 @@ def register(request):
         
         if user_form.is_valid():
             user_form.save()
-                                    
             user = auth.authenticate(request.POST.get('email'),
                                      password=request.POST.get('password1'))
-
+            
             if user:
                 auth.login(request, user)
+                user.customer.full_name = request.POST.get('full_name')
+                user.customer.street_Address1 = request.POST.get('street_Address1')
+                user.customer.street_Address2 = request.POST.get('street_Address2')
+                user.customer.town_or_city = request.POST.get('town_or_city')
+                user.customer.county = request.POST.get('county')
+                user.customer.country = request.POST.get('country')
+                user.customer.postcode = request.POST.get('postcode')
+                user.customer.phone_number = request.POST.get('phone_number')
+                user.save()
                 messages.success(request, "You have successfully registered")
                 return redirect(reverse('index'))
 
