@@ -16,7 +16,7 @@ class Customer(models.Model):
     email = models.CharField(max_length=254, blank=True)
     
     def __str__(self):
-        return self.user.email
+        return str(self.id)
 
 @receiver(post_save, sender=User)
 def create_customer_profile(sender, instance, created, **kwargs):

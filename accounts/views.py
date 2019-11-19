@@ -49,7 +49,6 @@ def login(request):
     return render(request, 'login.html', args)
 
 
-#@login_required
 @transaction.atomic
 def register(request):
     """A view that manages the registration form"""

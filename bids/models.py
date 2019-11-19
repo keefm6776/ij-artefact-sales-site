@@ -10,7 +10,7 @@ class Bids(models.Model):
     artefact_id = models.ForeignKey(Artefact, null=False, default='')
     customer_id = models.ForeignKey(Customer, null=False, default='')
     bid = models.DecimalField(max_digits=6, decimal_places=2, blank=False, default=0.00)
-    date = models.DateTimeField(blank=True, null=True, default=timezone.now)
-
+    date = models.DateTimeField(auto_now_add = True)
+        
     def __str__(self):
         return str(self.bid)

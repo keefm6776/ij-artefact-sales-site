@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Enter New Bid:</h2>
+    <h3>Current Bid: {{ highest_bid }}</h3>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
