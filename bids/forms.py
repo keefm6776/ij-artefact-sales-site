@@ -10,6 +10,6 @@ class BidsForm(forms.ModelForm):
     class Meta:
         model = Bids
         fields = ('bid',)
-        widgets = {
-            'bid': forms.NumberInput(attrs={'step': 10.00, 'min_value': {{ my_arg }} }),         
-        }
+       # widgets = {
+       #     'bid': forms.NumberInput(attrs={'step': 10.00, 'min_value': {{ my_arg }} }),         
+       # }

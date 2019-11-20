@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib import messages, auth
 from django.views.generic import DetailView, FormView
 from django.core.urlresolvers import reverse
@@ -48,6 +48,20 @@ def login(request):
     args = {'user_form': user_form, 'next': request.GET.get('next', '')}
     return render(request, 'login.html', args)
 
+@login_required
+def profile(request, id):
+    """A view that displays the profile page of a logged in user"""
+    customer = get_object_or_404(Customer, pk=id)
+    form = CustomerForm(instance=customer)
+     
+    if request.method == "POST":
+        form = CustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form = form.save()
+            return redirect(profile, id)
+        else:
+            form = CustomerForm(instance=customer)
+    return render(request, "profile.html", {'form': form})
 
 @transaction.atomic
 def register(request):
