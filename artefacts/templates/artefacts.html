@@ -2,6 +2,25 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+
+<div class="container">
+	<div class="ArtefactSearch-Container" class="display">
+		<form name="ArtefactSearch" action="{% url 'search' %}" method="get">
+			<p>Name: <input type="text" label = "artefact name" name="artefact_name"></p>
+				<p>Centuries Between <input type="number" min="0" label = "century" name="low_artefact_century" value="0"> And
+					<input label="century" type="number" min="0" name="high_artefact_century" value="50000">
+                    
+                    <p>Era:
+						<select type="text" label="era" name="artefact_era"></p>
+                                <option value=""></option>
+                                <option value="AD">AD</option>
+                                <option value="BC">BC</option>
+                            </select>
+						<p><button type="search">Search</button></p>
+		</form>
+	</div>
+</div>
+
 <div class="row row-flex">
 	{% for artefact in artefacts %}
 
@@ -16,7 +35,7 @@
 
 			<p><a href="{% url 'make_bid' artefact.id %}" class="btn btn-default">Bid</a></p>
 
-            {% if user.is_staff %}
+			{% if user.is_staff %}
 			<p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Edit</a></p>
 
 			{% else %}
