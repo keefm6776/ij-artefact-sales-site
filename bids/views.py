@@ -23,7 +23,7 @@ def make_bid(request, pk):
     user = request.user
     customer = get_object_or_404(Customer, pk=user.customer.id) if pk else None
     highest_bid = Bids.objects.latest('bid')
-    form = BidsForm(request.POST, request.FILES, highest_bid=highest_bid)
+    form = BidsForm(request.POST, request.FILES)
      
     if request.method == "POST":
         if form.is_valid():
@@ -31,10 +31,8 @@ def make_bid(request, pk):
             form.customer_id = customer
             form.artefact_id = artefact_bid
             form.save()
-            #return redirect(make_bid)
-            render(request, "make_bid.html", {'form': form, 'highest_bid': highest_bid})
+            return redirect(all_artefacts)
         else:
             form = BidsForm()
-            #return redirect(make_bid)
-            render(request, "make_bid.html", {'form': form, 'highest_bid': highest_bid})
+            return redirect(all_artefacts)
     return render(request, "make_bid.html", {'form': form, 'highest_bid': highest_bid})

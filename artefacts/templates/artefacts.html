@@ -35,9 +35,11 @@
 
 			<p><a href="{% url 'make_bid' artefact.id %}" class="btn btn-default">Bid</a></p>
 
-			{% if user.is_staff %}
+            
+            {% if user.is_staff %}
 			<p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Edit</a></p>
-
+            <p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Despatch</a></p>
+                    
 			{% else %}
 			<form method="post" action="{% url 'add_to_cart' artefact.id %}">
 				{% csrf_token %}
