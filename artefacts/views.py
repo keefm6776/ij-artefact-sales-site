@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from artefacts.models import Artefact
 from .forms import ArtefactForm
 
@@ -50,6 +51,24 @@ def edit_artefact_detail(request, id):
         form = ArtefactForm(instance=artefact)
 
     return render(request, "edit_artefact_detail.html", {'form': form})
+
+def despatch_artefact(request, id):
+    """ Makrs the artefact as despatched, with despatched date """
+    artefact = get_object_or_404(Artefact, id=id)
+    artefact.despatched = True
+    artefact.despatch_date = timezone.now()
+    artefact.save()
+
+    #if request.method == "POST":
+    #    form = ArtefactForm(request.POST, instance=artefact)
+    #    if form.is_valid():
+    #        form.save()
+    #        return redirect(all_artefacts)
+    #else:
+    #    form = ArtefactForm(instance=artefact)
+    
+    artefacts = Artefact.objects.filter(despatched=True)
+    return render(request, "artefacts_despatched.html", {"artefacts": artefacts})
 
 def delete_artefact(request, pk):
     """ Allows the Site Owner to delete the current artefact """
