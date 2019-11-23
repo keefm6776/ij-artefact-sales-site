@@ -20,13 +20,13 @@ from cart import urls as urls_cart
 from search import urls as urls_search
 from checkout import urls as urls_checkout
 from bids import urls as urls_bids
-from artefacts.views import all_artefacts
+from artefacts.views import for_sale_artefacts
 from django.views import static
 from .settings import MEDIA_URL
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', all_artefacts, name='index'),
+    url(r'^$', for_sale_artefacts, name='index'),
     url(r'^accounts/', include(urls_accounts)),
     url(r'^artefacts/', include(urls_artefacts)),
     url(r'^cart/', include(urls_cart)),

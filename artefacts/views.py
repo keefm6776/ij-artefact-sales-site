@@ -4,20 +4,20 @@ from .forms import ArtefactForm
 
 # Create your views here.
 
-def all_artefacts(request):
+def for_sale_artefacts(request):
     """ Finds all unsold artefacts in the database and displays them """
     artefacts = Artefact.objects.filter(sold=False)
     return render(request, "artefacts.html", {"artefacts": artefacts})
 
 def sold_artefacts(request):
     """ Finds all sold artefacts in the database and displays them """
-    artefacts = Artefact.objects.filter(sold=True)
-    return render(request, "artefacts.html", {"artefacts": artefacts})
+    artefacts = Artefact.objects.filter(sold=True, despatched=False)
+    return render(request, "artefacts_sold.html", {"artefacts": artefacts})
 
 def despatched_artefacts(request):
     """ Finds all sold artefacts in the database and displays them """
     artefacts = Artefact.objects.filter(despatched=True)
-    return render(request, "artefacts.html", {"artefacts": artefacts})
+    return render(request, "artefacts_despatched.html", {"artefacts": artefacts})
 
 def artefact_detail(request, pk):
     """ Displays all the artefact details to the user """

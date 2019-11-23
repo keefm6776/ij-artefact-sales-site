@@ -5,7 +5,7 @@
 
 <div class="container">
 	<div class="ArtefactSearch-Container" class="display">
-		<form name="ArtefactSearch" action="{% url 'do_search_for_sale' %}" method="get">
+		<form name="ArtefactSearch" action="{% url 'do_search_despatched' %}" method="get">
 			<p>Name: <input type="text" label = "artefact name" name="artefact_name"></p>
 				<p>Centuries Between <input type="number" min="0" label = "century" name="low_artefact_century" value="0"> And
 					<input label="century" type="number" min="0" name="high_artefact_century" value="100">
@@ -32,24 +32,8 @@
 			<p class="artefact-description">{{ artefact.description|truncatewords:20 }}</p>
 			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
 			<p>{{ artefact.price }}</p>
-
-			<p><a href="{% url 'make_bid' artefact.id %}" class="btn btn-default">Bid</a></p>
-
-            
-            {% if user.is_staff %}
-			<p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Edit</a></p>
-                    
-			{% else %}
-			<form method="post" action="{% url 'add_to_cart' artefact.id %}">
-				{% csrf_token %}
-				<div class="input-group">
-					<input name="quantity" type="number" min="0" max="1" class="form-control" placeholder="Quantity">
-					<span class="input-group-btn">
-                            <button class="btn btn-success" type="submit">Add</button>
-                        </span>
-				</div>
-			</form>
-			{% endif %}
+          
+            <p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Despatch</a></p>                  
 
 		</div>
 	</div>

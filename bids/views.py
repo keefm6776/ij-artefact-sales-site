@@ -5,7 +5,7 @@ from .models import Bids
 from artefacts.models import Artefact
 from customer.models import Customer
 from .forms import BidsForm
-from artefacts.views import all_artefacts
+from artefacts.views import for_sale_artefacts
 
 
 #def get_bids(request):
@@ -31,8 +31,8 @@ def make_bid(request, pk):
             form.customer_id = customer
             form.artefact_id = artefact_bid
             form.save()
-            return redirect(all_artefacts)
+            return redirect(for_sale_artefacts)
         else:
             form = BidsForm()
-            return redirect(all_artefacts)
+            return redirect(for_sale_artefacts)
     return render(request, "make_bid.html", {'form': form, 'highest_bid': highest_bid})
