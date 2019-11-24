@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
+# Extending User Model with Customer Model adapted from code at Simpleisbetterthancomplex.com
 @login_required
 @transaction.atomic
 def customer_profile(request):

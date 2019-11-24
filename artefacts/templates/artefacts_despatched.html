@@ -32,8 +32,6 @@
 			<p class="artefact-description">{{ artefact.description|truncatewords:20 }}</p>
 			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
 			<p>{{ artefact.price }}</p>
-          
-            <p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-default">Despatch</a></p>                  
 
 		</div>
 	</div>

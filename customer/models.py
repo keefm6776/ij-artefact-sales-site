@@ -18,6 +18,8 @@ class Customer(models.Model):
     def __str__(self):
         return str(self.id)
 
+# Extending User Model with Customer Model adapted from code at Simpleisbetterthancomplex.com
+
 @receiver(post_save, sender=User)
 def create_customer_profile(sender, instance, created, **kwargs):
     if created:

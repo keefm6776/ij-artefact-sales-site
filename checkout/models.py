@@ -18,7 +18,7 @@ class Order(models.Model):
     customer_id = models.ForeignKey(Customer, null=False, default='')
 
     def __str__(self):
-        return "{0}-{1}-{2}".format(self.id, self.date, self.delivery_full_name)
+        return str(self.id)
 
 
 class OrderLineItem(models.Model):
@@ -27,5 +27,6 @@ class OrderLineItem(models.Model):
     quantity = models.IntegerField(blank=False)
 
     def __str__(self):
-        return "{0} {1} @ {2}".format(
-            self.quantity, self.artefact.name, self.artefact.price)
+        return str(self.order)
+        #return "{0} {1} @ {2}".format(
+            #self.quantity, self.artefact.name, self.artefact.price)

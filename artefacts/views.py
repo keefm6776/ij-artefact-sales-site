@@ -34,10 +34,10 @@ def add_artefact(request):
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return redirect(all_artefacts)
+            return redirect(for_sale_artefacts)
         else:
             form = ArtefactForm()
-            return redirect(all_artefacts)
+            return redirect(for_sale_artefacts)
     return render(request, "add_artefact.html", {'form': form})
 
 def edit_artefact_detail(request, id):
@@ -49,7 +49,7 @@ def edit_artefact_detail(request, id):
         form = ArtefactForm(request.POST, instance=artefact)
         if form.is_valid():
             form.save()
-            return redirect(all_artefacts)
+            return redirect(for_sale_artefacts)
     else:
         form = ArtefactForm(instance=artefact)
 
@@ -57,42 +57,33 @@ def edit_artefact_detail(request, id):
 
 def despatch_artefact(request, id):
     """ Marks the artefact as despatched, with despatched date """
+    """ Sending html to a pdf file adapted from code at Simpleisbetterthancomplex.com"""
     
     artefact = get_object_or_404(Artefact, id=id)
     artefact.despatched = True
     artefact.despatch_date = timezone.now()
     artefact.save()
-    
-    OrderLine = get_object_or_404(OrderLineItem, id=artefact.id)
-    Order = get_object_or_404(Order, id=OrderLine.Order.delivery_full_name)
 
-    artefact_info = {"name": artefact.name, "price": artefact.price, "address":artefact}
+    order_line_info = OrderLineItem.objects.filter(artefact__pk=id)
+    order_id = Order.objects.filter(orderlineitem=order_line_info)
+    delivery = get_object_or_404(Order, pk=order_id)
+                    
+    artefact_info = {"name": artefact.name, "price": artefact.price, "order": delivery}
     html_string = render_to_string('../templates/despatch_template.html', {'artefact_info': artefact_info})
 
     html = HTML(string=html_string)
-    html.write_pdf(target='/tmp/despatch note {{artefact.name}}.pdf');
+    html.write_pdf(target='/tmp/despatch note.pdf');
 
     fs = FileSystemStorage('/tmp')
-    with fs.open('mypdf.pdf') as pdf:
+    with fs.open('despatch note.pdf') as pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        response['Content-Disposition'] = 'attachment; filename="despatch note.pdf"'
         return response
-
-    return response
-
-
-    #if request.method == "POST":
-    #    form = ArtefactForm(request.POST, instance=artefact)
-    #    if form.is_valid():
-    #        form.save()
-    #        return redirect(all_artefacts)
-    #else:
-    #    form = ArtefactForm(instance=artefact)
-    
+      
     artefacts = Artefact.objects.filter(despatched=True)
     return render(request, "artefacts_despatched.html", {"artefacts": artefacts})
 
 def delete_artefact(request, pk):
     """ Allows the Site Owner to delete the current artefact """
     artefact = get_object_or_404(Artefact, pk=pk)
-    return redirect(all_artefacts)
+    return redirect(for_sale_artefacts)

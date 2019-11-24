@@ -11,7 +11,7 @@ from artefacts.models import Artefact
 import stripe
 
 # Create your views here.
-# Taken From Code Institute Course Notes
+# Taken & Adpated From Code Institute Course Notes
 
 stripe.api_key = settings.STRIPE_SECRET
 
@@ -26,7 +26,7 @@ def checkout(request, id):
         if order_form.is_valid() and payment_form.is_valid():
             order = order_form.save(commit=False)
             order.date = timezone.now()
-            order.customer_id = Customer.id
+            order.customer_id = customer
             order.save()
 
             cart = request.session.get('cart', {})
@@ -53,10 +53,13 @@ def checkout(request, id):
 
             if customer.paid:
                 messages.error(request, "You have successfully paid")
+                
+                for id,quantity in cart.items():
+                   artefact = get_object_or_404(Artefact, pk=id)
+                   artefact.sold = True
+                   artefact.save()
                 request.session['cart'] = {}
-                artefact.sold = True
-                artefact.save()
-                return redirect(reverse('artefact'))
+                return redirect(reverse('for_sale_artefacts'))
             else:
                 messages.error(request, "Unable to take payment")
         else:
@@ -64,6 +67,7 @@ def checkout(request, id):
             messages.error(
                 request, "We were unable to take a payment with that card!")
     else:
+        """ Initialising paymemnt form to User Customer Details adapted from code at StackOverFlow.com"""
         payment_form = MakePaymentForm()
         order_form = OrderForm()
         data = {'delivery_full_name': customer.full_name, 'delivery_street_address1': customer.street_Address1, 'delivery_street_address2': customer.street_Address2, 'delivery_town_or_city': customer.town_or_city, 'delivery_county': customer.county, 'delivery_country': customer.country, 'delivery_postcode': customer.postcode, 'delivery_phone_number': customer.phone_number, 'delivery_email':customer.email }
