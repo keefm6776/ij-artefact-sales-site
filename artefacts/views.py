@@ -1,10 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+from django.template.loader import render_to_string
 from artefacts.models import Artefact
+from checkout.models import OrderLineItem, Order
 from .forms import ArtefactForm
-
-# Create your views here.
-
+from weasyprint import HTML
+    
 def for_sale_artefacts(request):
     """ Finds all unsold artefacts in the database and displays them """
     artefacts = Artefact.objects.filter(sold=False)
@@ -53,11 +56,30 @@ def edit_artefact_detail(request, id):
     return render(request, "edit_artefact_detail.html", {'form': form})
 
 def despatch_artefact(request, id):
-    """ Makrs the artefact as despatched, with despatched date """
+    """ Marks the artefact as despatched, with despatched date """
+    
     artefact = get_object_or_404(Artefact, id=id)
     artefact.despatched = True
     artefact.despatch_date = timezone.now()
     artefact.save()
+    
+    OrderLine = get_object_or_404(OrderLineItem, id=artefact.id)
+    Order = get_object_or_404(Order, id=OrderLine.Order.delivery_full_name)
+
+    artefact_info = {"name": artefact.name, "price": artefact.price, "address":artefact}
+    html_string = render_to_string('../templates/despatch_template.html', {'artefact_info': artefact_info})
+
+    html = HTML(string=html_string)
+    html.write_pdf(target='/tmp/despatch note {{artefact.name}}.pdf');
+
+    fs = FileSystemStorage('/tmp')
+    with fs.open('mypdf.pdf') as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        return response
+
+    return response
+
 
     #if request.method == "POST":
     #    form = ArtefactForm(request.POST, instance=artefact)
