@@ -22,7 +22,12 @@ def make_bid(request, pk):
     artefact_bid = get_object_or_404(Artefact, pk=pk) if pk else None
     user = request.user
     customer = get_object_or_404(Customer, pk=user.customer.id) if pk else None
-    highest_bid = Bids.objects.latest('bid')
+    
+    try:
+        highest_bid = Bids.objects.latest('bid')
+    except Bids.DoesNotExist:
+        highest_bid = 0.00
+
     form = BidsForm(request.POST, request.FILES)
      
     if request.method == "POST":
