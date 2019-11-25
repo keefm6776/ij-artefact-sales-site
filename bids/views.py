@@ -26,7 +26,7 @@ def make_bid(request, pk):
     customer = get_object_or_404(Customer, pk=user.customer.id) if pk else None
     
     try:
-        highest_bid = Bids.objects.filter(customer_id=customer).latest('bid')
+        highest_bid = Bids.objects.filter(customer_id=customer, artefact_id=pk).latest('bid').bid
     except Bids.DoesNotExist:
         highest_bid = 0.00
 
