@@ -9,7 +9,7 @@ class Bids(models.Model):
 
     artefact_id = models.ForeignKey(Artefact, null=False, default='')
     customer_id = models.ForeignKey(Customer, null=False, default='')
-    bid = models.DecimalField(max_digits=6, decimal_places=2, blank=False, default=0.00)
+    bid = models.FloatField(blank=False, default=0.00)
     date = models.DateTimeField(auto_now_add = True)
         
     def __str__(self):

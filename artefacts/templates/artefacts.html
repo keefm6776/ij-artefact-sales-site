@@ -4,8 +4,8 @@
 {% if user.is_authenticated %}
 
 <div class="container">
-	<div class="ArtefactSearch-Container" class="display">
-		<form name="ArtefactSearch" action="{% url 'do_search_for_sale' %}" method="get">
+	<div class="ArtefactSearch-Container" class="display center-block" >
+		<form name="ArtefactSearch" action="{% url 'do_search_for_sale' %}" method="get"  class="center-block text-center">
 			<p>Name: <input type="text" label = "artefact name" name="artefact_name"></p>
 				<p>Centuries Between <input type="number" min="0" label = "century" name="low_artefact_century" value="0"> And
 					<input label="century" type="number" min="0" name="high_artefact_century" value="100">
@@ -21,7 +21,7 @@
 	</div>
 </div>
 
-<div class="row row-flex">
+<div class="row row-flex" class="center-block">
 	{% for artefact in artefacts %}
 
 	<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
