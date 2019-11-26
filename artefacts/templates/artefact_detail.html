@@ -2,21 +2,25 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-sm-10 col-md-9 center-block">
+        <div class="center-block">
             {% if artefact.image %}
-                <img class="img-blogpost" url="{{ MEDIA_URL }}{{ artefact.image }}">
-                <!--<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>-->
+                <div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
             {% endif %}
-            <h3>{{ artefact.name }}</h3>
+            <h2>{{ artefact.name }}</h2>
             <div class="row">
-                <div class="col-xs-9">
+                <div class="center-block">
+                    <p><h4>Description:</h4>
                     <p>{{ artefact.description }}</p>
+                    <br>
+                    <p><h4>History:</h4>
                     <p>{{ artefact.history }}</p>
-                    <p><span class="boldtext">Century:</span> {{ artefact.century }} {{ artefact.era }}</p>
-                    <p><span class="boldtext">Price: €</span> {{ artefact.price }}</p>
-                    <hr>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <br>
+                    <p><h4>Century:</h4> {{ artefact.century }} {{ artefact.era }}</p>
+                    <br>
+                    <p><h4>Price: €</h4> {{ artefact.price }}</p>
+                    <br>
+                </div><!--center-block-->
+            </div><!--row-->
+        </div><!--center-block-->
+    </div><!--row-->
 {% endblock %}
