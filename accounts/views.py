@@ -22,7 +22,6 @@ def logout(request):
     messages.success(request, 'You have successfully logged out')
     return redirect(reverse('index'))
 
-
 def login(request):
     """A view that manages the login form"""
     if request.method == 'POST':

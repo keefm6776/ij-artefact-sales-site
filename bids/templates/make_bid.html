@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Enter New Bid:</h2>
-    <h3>Highest Bid: {{ highest_bid }}</h3>
+    <div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
+    <h2>Enter New Bid For: {{artefact.name}}</h2>
+    <h3>Highest Bid: €{{ highest_bid }}</h3>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-
         <button type="submit" class="btn btn-info">Bid Now!</button>
     </form>
 {% endblock %}

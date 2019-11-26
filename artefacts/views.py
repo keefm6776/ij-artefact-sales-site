@@ -33,13 +33,16 @@ def add_artefact(request):
     form = ArtefactForm(request.POST, request.FILES)
     if request.method == "POST":
         if form.is_valid():
-            form.save()
-            return redirect(for_sale_artefacts)
+            if form.cleaned_data["century"] > 0:
+                form.save()
+                return redirect(for_sale_artefacts)
+            else:
+                form.add_error(None, "The Century Cannot be negative or zero!")
         else:
             form = ArtefactForm()
             return redirect(for_sale_artefacts)
     return render(request, "add_artefact.html", {'form': form})
-
+          
 def edit_artefact_detail(request, id):
     """ Displays the selected Artefact to the Site Owner for editing """
     artefact = get_object_or_404(Artefact, pk=id)
@@ -48,8 +51,11 @@ def edit_artefact_detail(request, id):
     if request.method == "POST":
         form = ArtefactForm(request.POST, instance=artefact)
         if form.is_valid():
-            form.save()
-            return redirect(for_sale_artefacts)
+            if form.cleaned_data["century"] > 0:
+                form.save()
+                return redirect(for_sale_artefacts)
+            else:
+                form.add_error(None, "The Century Cannot be negative or zero!")          
     else:
         form = ArtefactForm(instance=artefact)
 
@@ -83,7 +89,7 @@ def despatch_artefact(request, id):
     artefacts = Artefact.objects.filter(despatched=True)
     return render(request, "artefacts_despatched.html", {"artefacts": artefacts})
 
-def delete_artefact(request, pk):
+def delete_artefact(request, id):
     """ Allows the Site Owner to delete the current artefact """
-    artefact = get_object_or_404(Artefact, pk=pk)
+    Artefact.objects.filter(id=id).delete()
     return redirect(for_sale_artefacts)

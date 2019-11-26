@@ -4,20 +4,20 @@
 
 {% block content %}
 
-<section class="news">
-    <div class="container">
-        <div class="row">
-            <div class="leftColumn">
-                <div class="card">
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %} {{ form|as_bootstrap }}
-                        <button type="submit" class="btn btn-default">Save</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<div class="news">
+	<div class="edit-artefact-container">
+		<div class="row">
+			<div class="leftColumn">
+				<div class="card">
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %} {{ form|as_bootstrap }}
+						<button type="submit" class="btn btn-default">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 

@@ -8,7 +8,7 @@ class Artefact(models.Model):
     name = models.CharField(max_length=254, default='', blank=False)
     history = models.TextField()
     description = models.TextField()
-    century = models.DecimalField(max_digits=3, decimal_places=0, blank=False)
+    century = models.DecimalField(max_digits=5, decimal_places=0, blank=False)
 
     ERA_CHOICES = (
         ('AD', 'Anno Domini'),

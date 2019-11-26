@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
+{% load bootstrap_tags %}
+
 {% block content %}
 
-<h1>Add Artefact........</h1>
 
-<form method="POST">
+<div class="add-artefact-container" class="center-block">
+	<div class="add-artefact">
+		<h1>Add Artefact:</h1>
 
-	{% csrf_token %}
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %} {{ form|as_bootstrap }}
+			<button type="submit" class="btn btn-default">Save</button>
+		</form>
+	</div><!-- add-artefact -->
+</div><!-- add-artefact-container -->
 
-    {{ form.as_p }}
-
-    <button type="submit">Save</button>
-
-
-</form>
 
 {% endblock %}
