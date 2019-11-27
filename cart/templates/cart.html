@@ -11,10 +11,10 @@
         <div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ item.artefact.image }}')"></div>
 
         <div class="caption">
-            <h3>{{ item.artefact.name }}</h3>
+            <h2>{{ item.artefact.name }}</h2>
 			<p class="artefact-description">{{ item.artefact.description|truncatewords:20 }}</p>
 			<p><a href="{% url 'artefact_detail' item.artefact.id %}" class="btn btn-default">Read more</a></p>
-			<p>{{ item.artefact.price }}</p>
+			<p><h3>{{ item.artefact.price }}</p></h3>
             
                 <form class="form-inline" method="post" action="{% url 'adjust_cart' item.id %}">
                     {% csrf_token %}

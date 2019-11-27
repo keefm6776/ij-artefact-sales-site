@@ -1,11 +1,18 @@
 {% extends "base.html" %}
+{% load bootstrap_tags %}
 {% block content %}
-    <p>You are logged in as {{ user.email }} </p>
-    
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+<div id="Profile-Container">
+	<br>
+	<p>
+		<h3>You are logged in as {{ user.email }} </h3>
+	</p>
 
-        <button type="submit" class="btn btn-info">Save Changes</button>
-    </form>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form | as_bootstrap }}
+
+		<button type="submit" class="btn btn-info">Save Changes</button>
+	</form>
+</div>
+<!--Profile-Container-->
 {% endblock %}

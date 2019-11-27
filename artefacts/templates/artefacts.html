@@ -3,23 +3,32 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-<div class="container">
-	<div id="ArtefactSearch-Container" class="display center-block" >
-		<form name="ArtefactSearch" action="{% url 'do_search_for_sale' %}" method="get"  class="center-block text-center">
-			<p>Name: <input type="text" label = "artefact name" name="artefact_name"></p>
-				<p>Centuries Between <input type="number" min="0" label = "century" name="low_artefact_century" value="0"> And
-					<input label="century" type="number" min="0" name="high_artefact_century" value="100">
-                                                          
-                    <p>Era:
-						<select type="text" label="era" name="artefact_era"></p>
+
+<div class="ArtefactSearch-Container" class="display center-block">
+	<div class="ArtefactSearch-title" class="display center-block">
+		<h3><i class="fa fa-search" aria-hidden="true"></i> Search:</h3>
+		<div class="ArtefactSearch-body" class="display center-block">
+			<form name="ArtefactSearch" action="{% url 'do_search_for_sale' %}" method="get"
+				class="center-block text-center">
+				<p>Name: <input type="text" label = "artefact name" name="artefact_name"></p>
+					<p>Centuries Between <input type="number" min="0" label = "century" name="low_artefact_century" value="0"> And
+						<input label="century" type="number" min="0" name="high_artefact_century" value="100">
+
+						<p>Era:
+							<select type="text" label="era" name="artefact_era"></p>
                                 <option value=""></option>
                                 <option value="AD">AD</option>
                                 <option value="BC">BC</option>
                             </select>
-						<p><button type="search">Search</button></p>
-		</form>
+							<<p><button class="btn btn-success" type="search">Search</button></p>
+			</form>
+		</div>
+		<!--ArtefactSearch-body-->
 	</div>
+	<!--ArtefactSearch-title-->
 </div>
+<!--ArtefactSearch-Container-->
+
 
 <div class="row row-flex" class="center-block">
 	{% for artefact in artefacts %}
@@ -28,16 +37,18 @@
 		<div class="panel-body">
 			<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
 
-			<h3>{{ artefact.name }}</h3>
+			<h2>{{ artefact.name }}</h2>
 			<p class="artefact-description">{{ artefact.description|truncatewords:10 }}</p>
 			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
-			<p><h3>€ {{ artefact.price }}</h3></p>
+			<p>
+				<h3> Buy Now: € {{ artefact.price }}</h3>
+			</p>
 
-         
-            {% if user.is_staff %}
+
+			{% if user.is_staff %}
 			<p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-info">Edit</a></p>
-            <p><a href="{% url 'delete_artefact' artefact.id %}" class="btn btn-danger">Delete</a></p>
-                    
+			<p><a href="{% url 'delete_artefact' artefact.id %}" class="btn btn-danger">Delete</a></p>
+
 			{% else %}
 			<form method="post" action="{% url 'add_to_cart' artefact.id %}">
 				{% csrf_token %}
@@ -46,18 +57,22 @@
 					<span class="input-group-btn">
                             <button class="btn btn-success" type="submit">Add</button>
                         </span>
-                </div>
-                <h5>NB, Artefacts Are unique, So Only One Can Be Added.</h5>
-                <h5>OR</h5>
-               	<p><a href="{% url 'make_bid' artefact.id %}" class="btn btn-primary">Bid</a></p>
+				</div>
+				<!--input-group-->
+				<h5>NB, Artefacts Are unique, So Only One Can Be Added.</h5>
+				<h3>Or</h3>
+				<p><a href="{% url 'make_bid' artefact.id %}" class="btn btn-primary">Bid</a></p>
 			</form>
 			{% endif %}
 
-		</div><!--panel-body-->
-	</div><!--grid-->
+		</div>
+		<!--panel-body-->
+	</div>
+	<!--grid-->
 
 	{% endfor %}
-</div><!--row row-flex-->
+</div>
+<!--row row-flex-->
 
 {% endif %}
 {% endblock %}
