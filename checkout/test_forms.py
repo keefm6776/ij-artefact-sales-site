@@ -1,11 +1,6 @@
 from django.test import TestCase
 from .forms import MakePaymentForm, OrderForm
 
-  
-    #expiry_month = forms.ChoiceField(label='Month', choices=MONTH_CHOICES, required=False)
-    #expiry_year = forms.ChoiceField(label='Year', choices=YEAR_CHOICES, required=False)
-    #stripe_id = forms.CharField(widget=forms.HiddenInput)
-
 class TestMakePaymentForm(TestCase):
 
 # Test that form cannot be created with incomplete information
