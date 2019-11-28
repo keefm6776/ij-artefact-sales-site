@@ -51,18 +51,18 @@ class TestToDoItemForm(TestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['history'], [u'This field is required.'])
     
-    #def test_correct_message_for_missing_century(self):
-    #    form = ArtefactForm({'form': 0})
-    #    self.assertFalse(form.is_valid())
-    #    self.assertEqual(form.errors['century'], [u'This field is required.'])
+    def test_correct_message_for_missing_century(self):
+        form = ArtefactForm({'form': ''})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors['century'], [u'This field is required.'])
     
     def test_correct_message_for_missing_era(self):
         form = ArtefactForm({'form': ''})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['era'], [u'This field is required.'])
     
-    #def test_correct_message_for_missing_price(self):
-    #    form = ArtefactForm({'form': 0})
-    #    self.assertFalse(form.is_valid())
-    #    self.assertEqual(form.errors['price'], [u'This field is required.'])
+    def test_correct_message_for_missing_price(self):
+        form = ArtefactForm({'form': ''})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors['price'], [u'This field is required.'])
     
