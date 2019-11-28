@@ -3,8 +3,6 @@ from django.utils import timezone
 from artefacts.models import Artefact
 from customer.models import Customer
 
-# Create your models here.
-
 class Bids(models.Model):
 
     artefact_id = models.ForeignKey(Artefact, null=False, default='')

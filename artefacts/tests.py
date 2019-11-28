@@ -1,11 +1,5 @@
 from django.test import TestCase
-
-# Create your tests here.
-
-from django.test import TestCase
 from .models import Artefact
-
-# Create your tests here.
 
 class ArtefactTests(TestCase):
     """ Tests to run against our Artefact Models """
