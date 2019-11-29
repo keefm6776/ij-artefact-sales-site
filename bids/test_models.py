@@ -1,16 +1,17 @@
 from django.test import TestCase
-from .models import Bids
+from .models import Bids, Artefact
 
 class BidsTests(TestCase):
     """ Tests to run against our Bids Models """
-
-   # def test_artefact_id_ok(self):
-    #    test_artefact_id = Bids(artefact_id={id:8, name:'Holy Grail'})
-     #   self.assertEqual(test_artefact_id.artefact_id, artefact_id={id:8, name:'Holy Grail'})
+    
+    #def test_artefact_id_ok(self):
+    #    artefact = Artefact(name="The Holy Grail")
+    #    artefact.save()
+    #    self.assertEqual(artefact.artefact_id, artefact_id={name:'Holy Grail'})
 
     #def test_customer_id_ok(self):
-    #    test_customer_id = Bids(customer_id=34)
-    #    self.assertEqual(test_artefact_id.artefact_id, 34)
+    #    customer = Customer(full_name="Keith Morton")
+    #    self.assertEqual(customer.customer_id, customer_id={full_name="Keith Morton")
 
     def test_bid_ok(self):
         test_bid = Bids(bid=22.00)

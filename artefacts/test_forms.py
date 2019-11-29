@@ -2,7 +2,7 @@ from django.test import TestCase
 from .forms import ArtefactForm
 
 # Create your tests here.
-class TestToDoItemForm(TestCase):
+class TestArtefactForm(TestCase):
 
 # Test that form cannot be created with incomplete information
 

@@ -13,6 +13,9 @@ from django.db import transaction
 # Create your views here.
 def index(request):
     """A view that displays the index page"""
+    current_user = request.user
+    print(current_user.id)
+
     return render(request, "index.html")
 
 
