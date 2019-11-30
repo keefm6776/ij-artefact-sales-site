@@ -1,12 +1,24 @@
 {% extends "base.html" %}
+{% load static from staticfiles %}
 {% block content %}
-    <div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
-    <h2>Enter New Bid For: {{artefact.name}}</h2>
-    <h3>Highest Bid: €{{ highest_bid }}</h3>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-info">Bid Now!</button>
-    </form>
-{% endblock %}
 
+<div id="make-bid-image" class="center-block">
+	{%if artefact.image%}
+	<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
+	{%else%}
+	<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:50%;" />
+    {%endif%}
+</div>
+	<!--make-bid-image-->
+
+	<div id="make-bid-container">
+		<h2>Enter New Bid For: {{artefact.name}}</h2>
+		<h3>Highest Bid: €{{ highest_bid }}</h3>
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-success">Bid Now!</button>
+            <button class="btn btn-danger" onclick="window.history.back()" class="waves-effect waves-light btn btn_small purple">Exit</button>
+		</form>
+	</div><!--make-bid-container-->
+	{% endblock %}

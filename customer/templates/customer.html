@@ -2,5 +2,6 @@
   {% csrf_token %}
   {{ user_form.as_p }}
   {{ customer_form.as_p }}
-  <button type="submit">Save changes</button>
+  <button type="submit" class="btn btn-success">Save changes</button>
+  <button class="btn btn-danger" onclick="window.history.back()" class="waves-effect waves-light btn btn_small purple">Exit</button>
 </form>
