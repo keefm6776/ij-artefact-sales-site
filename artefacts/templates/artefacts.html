@@ -38,9 +38,9 @@
 	<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
 		<div class="panel-body">
 			{%if artefact.image%}
-			<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
+			<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')" style="width:90%;"></div>
 			{%else%}
-			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:70%;" />
+			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%;" />
             {%endif%}
 
 			<h2>{{ artefact.name }}</h2>
