@@ -4,26 +4,23 @@
 
 {% block content %}
 
-<div class="news">
-	<div class="edit-artefact-container">
-		<div class="row">
-			<div class="leftColumn">
-				<div class="card">
-					<form method="POST" enctype="multipart/form-data">
-						{% csrf_token %} {{ form|as_bootstrap }}
-						<button type="submit" class="btn btn-success">Save</button>
-						<button class="btn btn-danger" onclick="window.history.back()" class="waves-effect waves-light btn btn_small purple">Exit</button>
-					</form>
-				</div>
-				<!--card-->
+<div class="edit-artefact-container">
+	<div class="row">
+		<div class="leftColumn">
+			<div class="card">
+				<form method="POST" enctype="multipart/form-data">
+					{% csrf_token %} {{ form|as_bootstrap }}
+					<button type="submit" class="btn btn-success">Save</button>
+					<button class="btn btn-danger" onclick="window.history.back()" class="waves-effect waves-light btn btn_small purple">Exit</button>
+				</form>
 			</div>
-			<!--leftColumn-->
+			<!--card-->
 		</div>
-		<!--row-->
+		<!--leftColumn-->
 	</div>
-	<!--edit-artefact-container-->
+	<!--row-->
 </div>
-<!--news-->
+<!--edit-artefact-container-->
 
 
 
