@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 {% block content %}
 
     <div class="row">
         <div class="center-block">
-            {% if artefact.image %}
-                <div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
-            {% endif %}
+            {%if artefact.image%}
+			<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
+			{%else%}
+			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:70%;" />
+            {%endif%}
             <h2>{{ artefact.name }}</h2>
             <div class="row">
                 <div class="center-block">

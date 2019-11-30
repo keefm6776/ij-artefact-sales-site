@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
-<div id="Profile-Container">
+<div id="Profile-Container" class="center-block">
 	<br>
 	<p>
-		<h3>You are logged in as {{ user.email }} </h3>
+		<h4>You are logged in as: </h4>
 	</p>
-
+	<p>
+		<h4>{{ user.email }}</h4>
+	</p>
 	<form method="POST">
 		{% csrf_token %}
 		{{ form | as_bootstrap }}
