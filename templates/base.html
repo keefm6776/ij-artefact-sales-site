@@ -23,8 +23,10 @@
 
 <body>
 	<!-- Fixed masthead -->
-	<nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
+	<!--<nav class="navbar navbar-masthead navbar-default navbar-fixed-top">-->
+    <div class="navbar navbar-masthead navbar-default navbar-static-top">
 		<div class="container">
+			
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -36,7 +38,7 @@
 			</div>
 			<!--navbar-header-->
 
-			<div id="navbar" class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse">
 				{% if user.is_staff %}
 				<ul class="nav navbar-nav navbar-left">
 
@@ -111,8 +113,11 @@
 				<div class="text-block center-block ">
 					<h1>Indiana Jones Is Retiring!</h1>
 					<p>
-						<h3>& he is putting his collection of Artefacts up for Sale.</h3>
+						<h3>& he is putting his collection</h3>
 					</p>
+                    <p> 
+                     <h3>of Artefacts up for Sale.</h3>
+                    </p>
 					<p>
 						<h3>To Bid or Buy, Register Or Log In.</h3>
 					</p>
