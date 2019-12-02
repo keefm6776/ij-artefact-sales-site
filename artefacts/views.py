@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.template.loader import render_to_string
+from bids.models import Bids
 from artefacts.models import Artefact
 from checkout.models import OrderLineItem, Order
 from .forms import ArtefactForm
@@ -15,7 +16,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def for_sale_artefacts(request):
     """ Finds all unsold artefacts in the database and displays them """
     artefacts = Artefact.objects.filter(sold=False).order_by('-id')
-
+    
     page = request.GET.get('page', 1)
     paginator = Paginator(artefacts, 10)
 

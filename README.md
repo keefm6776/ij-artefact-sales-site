@@ -398,16 +398,19 @@ computers being on the decline and Windows 10 taking over this market with MS Ed
 
         7)  On small screens the search banner was too big, so I have re-ordered the fields in it and changed 
             CSS to make it more suitable.
+
+        8)  Also on small screens flexbox made the width of the display container for each artefact too narrow
+            so I added a mixin, to make this wider on the smallest screens.
         
-        8)  On the profile page, the "You are looged in as:" line was too big, mainly on smaller screens, 
+        9)  On the profile page, the "You are logged in as:" line was too big, mainly on smaller screens, 
             I have changed this to a more appropriate size.  Also the fields were not centred, so I have 
             used bootstrap to achieve this.
 
-        9)  I found that when there was no image reference in the database that as you would expect, there was 
+        10)  I found that when there was no image reference in the database that as you would expect, there was 
             no image shown when the artefact was listed.  When this occurs I have displayed a default image, 
             so that there is an image displyed to match the other listings.
-        
-       10)  Payments - I have tested my payments with Stripe using the following details:
+         
+       11)  Payments - I have tested my payments with Stripe using the following details:
 
             Card No:        4242 4242 4242 4242
             CCV:            123                     (any three digits)
@@ -440,6 +443,8 @@ computers being on the decline and Windows 10 taking over this market with MS Ed
 
     Username :  examiner
     Password :  #letmecheck
+
+    Naturally, you can register yourself as a User to check the selling end of the site.
 
 ##Code Validation:
 

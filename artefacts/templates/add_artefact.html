@@ -8,11 +8,10 @@
 	<div class="add-artefact">
 		<h1>Add Artefact:</h1>
 
-		<form method="POST" enctype="multipart/form-data">
+		<form class="form-padding" method="POST" enctype="multipart/form-data">
 			{% csrf_token %} {{ form|as_bootstrap }}
 			<button type="submit" class="btn btn-success">Save</button>
-            <button class="btn btn-danger" onclick="window.history.back()" 
-                class="waves-effect waves-light btn btn_small purple">Exit</button>
+            <button type="button" class="btn btn-danger" onclick="window.history.back()" >Exit</button>
 		</form>
 	</div><!-- add-artefact -->
 </div><!-- add-artefact-container -->

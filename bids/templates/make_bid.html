@@ -4,21 +4,22 @@
 
 <div id="make-bid-image" class="center-block">
 	{%if artefact.image%}
-	<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="width:90%;" />
+		<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="width:90%; height:33%" />
 	{%else%}
-	<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%;" />
+	    <img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%; height:33%" />
     {%endif%}
+
 </div>
 	<!--make-bid-image-->
 
 <div id="make-bid-container">
 	<h2>Enter New Bid For: {{artefact.name}}</h2>
 	<h3>Highest Bid: €{{ highest_bid }}</h3>
-	<form method="POST">
+	<form method="POST" class="form-padding">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button type="submit" class="btn btn-success">Bid Now!</button>
-           <button class="btn btn-danger" onclick="window.history.back()" class="waves-effect waves-light btn btn_small purple">Exit</button>
+           <button type="button" class="btn btn-danger" onclick="window.history.back()" >Exit</button>
 	</form>
 </div><!--make-bid-container-->
 {% endblock %}

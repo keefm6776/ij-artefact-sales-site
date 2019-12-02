@@ -2,40 +2,31 @@
 {% load static from staticfiles %}
 {% block content %}
 
-
-
 <div id="artefact-detail-image" class="center-block">
 	{%if artefact.image%}
-	<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="width:90%;" />
-    {%else%}
-    <img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%;" />
+	<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="width:90%; height:33%" />
+	{%else%}
+	<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%; height:33%" />
     {%endif%}
+
 </div>
 	<!--artefact-detail-image-->
 
 	<div id="artefact-detail-body" class="row center-block">
 		<h2>{{ artefact.name }}</h2>
-		<div<h2>{{ artefact.name }}</h2>>
-			<p>
-				<h4>Description:</h4>
-				<p>{{ artefact.description }}</p>
-				<br>
-				<p>
-					<h4>History:</h4>
-					<p>{{ artefact.history }}</p>
-					<br>
-					<p>
-						<h4>Century:</h4> {{ artefact.century }} {{ artefact.era }}
-					</p>
-					<br>
-					<p>
-						<h4>Price: €</h4> {{ artefact.price }}
-					</p>
-					<br>
-                </div>
-					<!--center-block-->
+		<h4>Description:</h4>
+		<p>{{ artefact.description }}</p>
+		<br>
+		<p>
+			<h4>History:</h4>
+			<p>{{ artefact.history }}</p>
+			<br>
+			<h4>Century:</h4> {{ artefact.century }} {{ artefact.era }}
+			<br>
+			<h4>Price: €</h4> {{ artefact.price }}
+			<br>
 
-					<button class="btn btn-danger" onclick="window.history.back()" class="waves-effect waves-light btn btn_small purple">Exit</button>
+			<button type="button" class="btn btn-danger" onclick="window.history.back()" >Exit</button>
 	</div>
 	<!--center-block-->
 	{% endblock %}

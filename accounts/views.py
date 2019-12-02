@@ -14,10 +14,7 @@ from django.db import transaction
 def index(request):
     """A view that displays the index page"""
     current_user = request.user
-    print(current_user.id)
-
     return render(request, "index.html")
-
 
 def logout(request):
     """A view that logs the user out and redirects back to the index page"""
