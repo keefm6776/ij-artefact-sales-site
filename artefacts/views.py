@@ -50,7 +50,6 @@ def despatched_artefacts(request):
     """ Finds all sold artefacts in the database and displays them """
     artefacts = Artefact.objects.filter(despatched=True).order_by('-id')
 
-
     page = request.GET.get('page', 1)
     paginator = Paginator(artefacts, 10)
 

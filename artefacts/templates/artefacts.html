@@ -10,14 +10,15 @@
 		<div class="ArtefactSearch-body" class="display center-block">
 			<form name="ArtefactSearch" action="{% url 'do_search_for_sale' %}" method="get"
 				class="center-block text-center">
-				<p>Name: <input type="text" label = "artefact name" name="artefact_name"></p>
+				<p>Name: </p>
+                <p><input type="text" label = "artefact name" name="artefact_name"></p>
 					<p>Centuries Between</p>
 					<p><input type="number" min="0" label = "century" name="low_artefact_century" value="0"> </p>
 						<p>And</p>
 						<input label="century" type="number" min="0" name="high_artefact_century" value="100">
 
-						<p>Era:
-							<select type="text" label="era" name="artefact_era"></p>
+						<p>Era:</p>
+							<p><select type="text" label="era" name="artefact_era"></p>
                                 <option value=""></option>
                                 <option value="AD">AD</option>
                                 <option value="BC">BC</option>
@@ -31,6 +32,7 @@
 </div>
 <!--ArtefactSearch-Container-->
 
+<h2>Artefacts For Sale:</h2>
 
 <div class="row row-flex" class="center-block">
 	{% for artefact in artefacts %}
@@ -38,7 +40,7 @@
 	<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
 		<div class="panel-body">
 			{%if artefact.image%}
-			<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')" style="width:90%;"></div>
+			<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="width:90%;" />
 			{%else%}
 			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%;" />
             {%endif%}

@@ -6,9 +6,9 @@
 
 <div id="artefact-detail-image" class="center-block">
 	{%if artefact.image%}
-	<div class="artefact" style="background-image: url('{{ MEDIA_URL }}{{ artefact.image }}')"></div>
-	{%else%}
-	<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:50%;" />
+	<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="width:90%;" />
+    {%else%}
+    <img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%;" />
     {%endif%}
 </div>
 	<!--artefact-detail-image-->
