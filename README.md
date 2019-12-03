@@ -5,17 +5,24 @@
 
 ##Project purpose:
 
-In this project, you'll build a full-stack site based around business logic used to control a centrally-owned dataset. You will set up an authentication mechanism and provide paid access to the site's data and/or other activities based on the dataset, such as the purchase of a artefact/service.
+In this project, you'll build a full-stack site based around business logic used to control a 
+centrally-owned dataset. You will set up an authentication mechanism and provide paid access 
+to the site's data and/or other activities based on the dataset, such as the purchase of an 
+artefact/service.
 
-Value provided: By authenticating on the site and paying for some of its services, users can advance their own goals. Before authenticating, the site makes it clear how those goals would be furthered by the site.
+Value provided: By authenticating on the site and paying for some of its services, users can 
+advance their own goals. Before authenticating, the site makes it clear how those goals would 
+be furthered by the site.
 
-The site owner is able to make money by providing this set of services to the users. There is no way for a regular user to bypass the site's mechanisms and derive all of the value available to paid users without paying.
+The site owner is able to make money by providing this set of services to the users. There is 
+no way for a regular user to bypass the site's mechanisms and derive all of the value available 
+to paid users without paying.
 
 ##BRIEF (CHOSEN PROJECT)
 
 Build an auction place to sell historical artifacts, with the following goals:
 
-1.  External user’s goal:   Find, learn about and acquire artefacts they are interested in
+1.  External user’s goal:   Find, learn about and acquire artefacts they are interested in.
 
 2.  Site owner's goal:      Earn money on selling the artifacts (the site owner is the seller)
     Potential features to include:
@@ -39,7 +46,7 @@ Build an auction place to sell historical artifacts, with the following goals:
 
 ##Advanced potential feature (nice-to-have)
 
-1.  Allow registered users to write reviews about the artifacts, only if they purchased them.
+1.  Allow registered users to write reviews about the artefacts, only if they purchased them.
 
 2.  Expand the search functionality to allow users to sort results based on price,
     age and other parameters in both ascending and descending order.
@@ -60,23 +67,39 @@ Before Starting, I started to create some user stories:
     history and what era it is from.
 3.	As a User I want to be able to purchase the artefact if I like it, or leave a bid
     if I am not willing to pay the price asked.
-4.  As the site's owner I want to be able to manage the items on the site, adding them as
+4.  As a User if I buy an artefact or have a bid accepted, I want to have it delivered to available
+    to have it delivered to an address of my choosing.
+5.  As the site's owner I want to be able to manage the items on the site, adding them as
     they become available to me and to mark them as sold when they sell.
-5.  As the site's owner I want to be able to accept a bid that I deem acceptable for the item.
+6.  As the site's owner I want to be able to accept a bid that I deem acceptable for the item.
 
 ##Database Design
 
-Before starting this project, I researched various e-commerce websites that are on the web, as mentioned in Credits -> Content, Below. I then set about drawing up a database schema for a relational database as per the project requirements.
+Before starting this project, I researched various e-commerce websites that are on the web, 
+as mentioned in Credits -> Content, Below. I then set about drawing up a database schema for 
+a relational database as per the project requirements.
+
+Reference Diagrams in Database & UI Design Folder:
+
+Database Schema.pdf
+Overview Of Database.pdf
 
 ##UX
 
 As part of the development process I mocked up wireframes of my recipe site before starting:
 
-See my repository's file list:
+Reference Diagrams in Database & UI Design Folder:
 
-.PDF .PDF
+Add+Edit Artefact Screen.pdf
+Artefact For Sale Screen.pdf
+Artefact For Sale Small Screens.pdf
+Cart Screen.pdf
+Checkout Screens.pdf
+Log In SCreens.pdf
+Profile Screens.pdf
+Registration Screens.pdf
 
-Which are located in the Wireframe directory.
+Which are located in the Database & UI Design Folder.
 
 ##Features
 
@@ -173,6 +196,7 @@ Authentification:
                                     the advertised price.  It still remains to implement a feature for a 
                                     staff user to be able to accept a bid from a given user, and remove
                                     the item from sale, instead of that user paying full price.
+
 ##Technologies Used
 
 			1.	GITPOD	        -   All the HTML/CSS/JAVASCRIPT/PYTHON was edited using GITPOD.
@@ -236,10 +260,11 @@ Authentification:
             15. weasyprint (HTML) - Enabled me to create the pdf file which was used as a despatch note for the artefact.
 
 ##Git Commits
+
 I have made regular Git Commits during my project for version control and also to allow myself to go back if anything went wrong. I have pushed each of these commits to GitHub, so that the progress of my project can be reviewed. I folowed the steps provided by the GitHub site, which were:
 
 			1.	I set up a page in GITPOD
-			
+
             2.	In the terminal I typed "git init", to initialise the repository
 			
             3.	To add files to be committed, I typed "git add ."
@@ -299,6 +324,10 @@ This project has been deployed via Heroku at :
 
                 https://ijones-artefact-sales.herokuapp.com/
 
+My Site Files and other supporting Files can be found at:
+
+                https://github.com/keefm6776/ij-artefact-sales-site
+
 ##Testing
 Each new feature had been tested after each stage of development within the GITPOD environment. 
 
@@ -339,7 +368,6 @@ After deployment the site has been tested for the above on:
 	
     3.	iPad Air 2 on portrait screen. (iOS 12 - Safari)
 	
-    
     4.	iPad Air 2 on landscape screen. (iOS 12 - Safari)
 	
     5.  Samsung Galaxy s9 on portrait screen. (Android 8.0.0 (Oreo) - Samsung Internet)
@@ -423,7 +451,6 @@ computers being on the decline and Windows 10 taking over this market with MS Ed
             test would pass. 
         
         
-
 ##Unresolved Issues:
 
     Manual Testing:
@@ -434,6 +461,9 @@ computers being on the decline and Windows 10 taking over this market with MS Ed
             to find why this did not upload the file to my S3 bucket, especially considering it worked 
             correctly from the admin panel.  This has meant that I have added the default site image to 
             add as the image for any artefact that has been added via the app that has not image.
+        
+        2)  On small screens, the artefact listings are very narrow.  I tried a number of ways to recitfy
+            this but was unable to do so in a satidfactory way.
 
 
 ##Examination
@@ -448,6 +478,16 @@ computers being on the decline and Windows 10 taking over this market with MS Ed
 
 ##Code Validation:
 
+    I have validated my site with W3C validation tools:
+
+    1)  For HTML, I have managed to eliminate any errors in the validation tool, with the
+        exception of Errors arising from:
+
+        i)  Extending base.html (ie no DOCTYPE or language declaration etc)
+       ii)  Use of templating syntax.
+
+    2)  For CSS, I have managed to eliminate any validation errors in my CSS as per the 
+        validation tool.
 
 
 ##Content
@@ -462,11 +502,14 @@ computers being on the decline and Windows 10 taking over this market with MS Ed
 
 ##Acknowledgements
             - Code institute notes for basics on e-Commerce Website to adapt and base my code on.
-              (including Stripe functionality, creation and use of a shopping cart.)
+              (including Stripe functionality, creation and use of a shopping cart & Checkout.)
             - Code institute notes for basics on Javascript and JQuery to adapt and base my code on.
-            - https://www.w3schools.com/ for information and examples to adapt and base my code on.
-            - https://stackoverflow.com/ for information and examples to adapt and base my code on.
-            - https://simpleisbetterthatcomplex.com/ for information and examples to base my code on.
+            - https://www.w3schools.com/ for reference on syntax and usage.
+            - https://stackoverflow.com/ for referemce on syntax and usage.  Also examples to base
+              my code on to be able to inistialise the checkout form with customer information for the
+              User/Customer model.
+            - https://simpleisbetterthatcomplex.com/ for information on how to extend the user model,
+              how to create a pdf file, and examples to base my code on.
             - https://https://en.wikipedia.org/wiki/ for sample artefacts to include in my site.
             - My Mentor Theo Despoudis - for his general guidance.
             - The CI Tutor Team for their repeated help with issues along the way.
