@@ -4,10 +4,11 @@
 
 <div id="artefact-detail-image" class="center-block">
 	{%if artefact.image%}
-	<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="width:90%; height:33%" />
+		<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="max-width:80%;max-height:200px;object-fit: contain;" />
 	{%else%}
-	<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:90%; height:33%" />
+		<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="max-width:80%;max-height:200px;object-fit: contain;" />
     {%endif%}
+
 
 </div>
 	<!--artefact-detail-image-->
