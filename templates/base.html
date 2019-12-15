@@ -21,24 +21,18 @@
 	{% endblock head_js %}
 </head>
 
-<body>
-	<!-- Fixed masthead -->
-	<!--<nav class="navbar navbar-masthead navbar-default navbar-fixed-top">-->
-    <div class="navbar navbar-masthead navbar-default navbar-static-top">
+<nav>
+	<div class="navbar navbar-masthead navbar-default navbar-static-top">
 		<div class="container">
-			
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="sr-only">Toggle navigation</span>  
                 </button>
 				<a class="navbar-brand" href="/">Artefact Sales</a>
 			</div>
 			<!--navbar-header-->
-
-            <div id="navbar" class="navbar-collapse collapse">
+			{% if user.is_authenticated %}
+			<div id="navbar" class="navbar-collapse collapse">
 				{% if user.is_staff %}
 				<ul class="nav navbar-nav navbar-left">
 
@@ -63,28 +57,26 @@
 					<li><a href="{% url 'add_artefact' %}"><i class="fa fa-plus-circle"></i> Add</a></li>
 				</ul>
 				<!--nav navbar-nav navbar-center-->
-				{% endif %}
+				{% else %}
 
-				{% if user.is_authenticated %}
 				<ul class="nav navbar-nav navbar-right">
-					{% if not user.is_staff %}
-					<!--<ul class="nav navbar-nav navbar-right">-->
-						<li>
-							<a href="{% url 'view_cart'%}">
-								<i class="fa fa-shopping-cart"></i> Cart
-								{% if item_count > 0 %}
-								<label class="badge badge-warning">{{ item_count }}</label>
-								{% endif %}
-							</a>
-						</li>
-					<!--</ul>-->
-					<!--nav navbar-nav navbar-right-->
-					{% endif %}
 
+					<li>
+						<a href="{% url 'view_cart'%}">
+							<i class="fa fa-shopping-cart"></i> Cart
+							{% if item_count > 0 %}
+							<label class="badge badge-warning">{{ item_count }}</label>
+							{% endif %}
+						</a>
+					</li>
 					<li><a href="{% url 'profile' user.customer.id %}">Profile</a></li>
 					<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
 				</ul>
 				<!--nav navbar-nav navbar-right-->
+
+				{% endif %}
+
+
 				{%  else %}
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a></li>
@@ -92,70 +84,66 @@
 				</ul>
 				<!--nav navbar-nav navbar-right-->
 				{% endif %}
-
-
-			</div><!-- navbar-->
+			</div>
+			<!--navbar-collapse collapse-->
 		</div>
 		<!--container-->
-	</nav>
+	</div>
+	<!-- navbar-->
+</nav>
 
-	<body>
-		<div class="row center-block text-center">
-			<div id="indiana-container" class="img-responsive">
-				<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:70%;" />
-            </div>
-				<!--row-->
+<body>
+	<div class="row center-block text-center">
+		<div id="indiana-container" class="img-responsive">
+			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="width:70%;" />
+        </div>
+		<!--row-->
 
-				{% if user.is_authenticated %}
+		{% if user.is_authenticated %}
+		<div id="log-details" class="row center-block text-center">
+			{% block content %} {% endblock %}
+		</div>
+		<!--grid-->
+		{% else %}
 
-				{% else %}
+		<div class="text-block center-block ">
+			<h1>Indiana Jones Is Retiring!</h1>
+			<p>
+				<h3>& he is putting his collection</h3>
+			</p>
+			<p>
+				<h3>of Artefacts up for Sale.</h3>
+			</p>
+			<p>
+				<h3>To Bid or Buy, Register Or Log In.</h3>
+			</p>
+		</div>
+		<!--text-block-->
 
-				<div class="text-block center-block ">
-					<h1>Indiana Jones Is Retiring!</h1>
-					<p>
-						<h3>& he is putting his collection</h3>
-					</p>
-                    <p> 
-                     <h3>of Artefacts up for Sale.</h3>
-                    </p>
-					<p>
-						<h3>To Bid or Buy, Register Or Log In.</h3>
-					</p>
-				</div>
-				<!--text-block-->
-
-				<p><a href="{% url 'register' %}" class="btn btn-primary" role="button">Register</a>
-				<a href="{% url 'login' %}" class="btn btn-success" role="button">Log In</a></p>
-
-				{% endif %}
-			</div>
-			<!--row-->
-
-			{% if messages %}
-			<div class="alert alert-success">
-				<div class="messages">
-					{% for message in messages %}
-					{{ message }}
-					{% endfor %}
-				</div>
-				<!--messages-->
-			</div>
-			<!--alert alert-success-->
+		<p><a href="{% url 'register' %}" class="btn btn-primary" role="button">Register</a>
+			<a href="{% url 'login' %}" class="btn btn-success" role="button">Log In</a></p>
 			{% endif %}
+	</div>
+	<!--row-->
 
-			<div id="log-details" class="row center-block text-center">
-				{% block content %} {% endblock %}
-			</div>
-			<!--grid-->
+	{% if messages %}
+	<div class="alert alert-success">
+		<div class="messages">
+			{% for message in messages %}
+			{{ message }}
+			{% endfor %}
+		</div>
+		<!--messages-->
+	</div>
+	<!--alert alert-success-->
+	{% endif %}
+</body>
 
-
-			<footer>
-				<div class="container">
-					<p></p>
-				</div>
-				<!--container-->
-			</footer>
-
-	</body>
+<footer>
+	<div class="container">
+		<p></p>
+	</div>
+	<!--container-->
+</footer>
 
 </html>
