@@ -20,7 +20,6 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = (
-            'delivery_full_name', 'delivery_phone_number', 'delivery_country', 'delivery_postcode',
-            'delivery_town_or_city', 'delivery_street_address1', 'delivery_street_address2',
-            'delivery_county'
-        )
+            'delivery_full_name', 'delivery_phone_number', 'delivery_street_address1', 
+            'delivery_street_address2', 'delivery_town_or_city', 'delivery_county',
+            'delivery_country', 'delivery_postcode', )
