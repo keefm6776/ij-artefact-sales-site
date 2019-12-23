@@ -64,11 +64,16 @@
     					    <li><a href="{% url 'add_artefact' %}"><i class="fa fa-plus-circle"></i> Add</a></li>
 				        </ul>
 				        <!--nav navbar-nav navbar-center-->
-                    
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{% url 'profile' user.customer.id %}">Profile</a></li>
+					        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                        </ul>
+                        <!--nav navbar-nav navbar-right-->
                     {% else %}
                     <!-- user is not staff-->
 
-                        <ul class="nav navbar-nav navbar-center">
+                        <ul class="nav navbar-nav navbar-right">
                             <li>
 							    <a href="{% url 'view_cart'%}">
 							    <i class="fa fa-shopping-cart"></i> Cart
@@ -77,16 +82,13 @@
 	    						{% endif %}
 		    					</a>
 			    			</li>
+                            <li><a href="{% url 'profile' user.customer.id %}">Profile</a></li>
+					        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
                         </ul>
                         <!--navbar-center-->
 				    {% endif %}
                     <!-- user is staff -->
-
-                    <ul class="nav navbar-nav navbar-right">
-					    <li><a href="{% url 'profile' user.customer.id %}">Profile</a></li>
-					    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
-				    </ul>
-				    <!--nav navbar-nav navbar-right-->
+                    
 				{%  else %}
                 <!-- user is not authenticated -->
 
