@@ -14,10 +14,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def for_sale_artefacts(request):
-    """ Finds all unsold artefacts in the database and displays them """
-
+    """ Finds all unsold artefacts in the database and displays them,
+        newest first """
     artefacts = Artefact.objects.filter(sold=False).order_by('-id')
 
+    """initiate paginator"""
     page = request.GET.get('page', 1)
     paginator = Paginator(artefacts, 10)
 
@@ -32,9 +33,12 @@ def for_sale_artefacts(request):
 
 
 def sold_artefacts(request):
-    """ Finds all sold artefacts in the database and displays them """
+    """ Finds all sold artefacts (not despatched) in the database and displays them,
+        newest first"""
+        
     artefacts = Artefact.objects.filter(sold=True, despatched=False).order_by('-id')
 
+    """inititate paginator"""
     page = request.GET.get('page', 1)
     paginator = Paginator(artefacts, 10)
 
@@ -49,9 +53,11 @@ def sold_artefacts(request):
 
 
 def despatched_artefacts(request):
-    """ Finds all sold artefacts in the database and displays them """
+    """ Finds all sold artefacts that have been despatched in the 
+    database and displays them """
     artefacts = Artefact.objects.filter(despatched=True).order_by('-id')
 
+    """initiate paginator"""
     page = request.GET.get('page', 1)
     paginator = Paginator(artefacts, 10)
 
@@ -66,7 +72,7 @@ def despatched_artefacts(request):
 
 
 def artefact_detail(request, pk):
-    """ Displays all the artefact details to the user """
+    """ Displays all the details of the selected artefact to the user """
     artefact = get_object_or_404(Artefact, pk=pk)
     return render(request, "artefact_detail.html", {"artefact": artefact})
 
@@ -76,6 +82,7 @@ def add_artefact(request):
     form = ArtefactForm(request.POST, request.FILES)
     if request.method == "POST":
         if form.is_valid():
+            """If century is valid, ie not zero or -ve"""
             if form.cleaned_data["century"] > 0:
                 form.save()
                 return redirect(for_sale_artefacts)
@@ -90,11 +97,13 @@ def add_artefact(request):
 def edit_artefact_detail(request, id):
     """ Displays the selected Artefact to the Site Owner for editing """
     artefact = get_object_or_404(Artefact, pk=id)
+    """create form with selected artefact's details deisplayed"""
     form = ArtefactForm(instance=artefact)
 
     if request.method == "POST":
         form = ArtefactForm(request.POST, instance=artefact)
         if form.is_valid():
+            """If century is valid, ie not zero or -ve"""
             if form.cleaned_data["century"] > 0:
                 form.save()
                 return redirect(for_sale_artefacts)
@@ -111,14 +120,21 @@ def despatch_artefact(request, id):
     """ Sending html to a pdf file adapted from code at Simpleisbetterthancomplex.com"""
 
     artefact = get_object_or_404(Artefact, id=id)
+    """set despatched to true"""
     artefact.despatched = True
+    """mark the despatched date as today"""
     artefact.despatch_date = timezone.now()
     artefact.save()
 
+    """find the order line which includes the despatching artefact"""
     order_line_info = OrderLineItem.objects.filter(artefact__pk=id)
+    """find the order details for this artefact"""
     order_id = Order.objects.filter(orderlineitem=order_line_info)
+    """get the delivery details for this artefact"""
     delivery = get_object_or_404(Order, pk=order_id)
 
+   
+    """Create despatch note in pdf format, for printing/daving"""
     artefact_info = {"name": artefact.name,
                      "price": artefact.price, "order": delivery}
     html_string = render_to_string(

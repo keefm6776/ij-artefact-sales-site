@@ -18,12 +18,16 @@ stripe.api_key = settings.STRIPE_SECRET
 
 @login_required()
 def checkout(request, id):
+    """get customer object for current user"""
     customer_object = get_object_or_404(Customer, pk=id)
+    """initialise order and makepayment forms"""
     order_form = OrderForm(request.POST)
     payment_form = MakePaymentForm(request.POST)
 
     if request.method == "POST":
+        """ if both order form and payment forms are valid """
         if order_form.is_valid() and payment_form.is_valid():
+            """save order information with date and customer info"""
             order = order_form.save(commit=False)
             order.date = timezone.now()
             order.customer_id = customer_object
@@ -32,6 +36,7 @@ def checkout(request, id):
             cart = request.session.get('cart', {})
             total = 0
             for id, quantity in cart.items():
+                """Total order amount"""
                 artefact = get_object_or_404(Artefact, pk=id)
                 total += quantity * artefact.price
                 order_line_item = OrderLineItem(
@@ -42,6 +47,7 @@ def checkout(request, id):
                 order_line_item.save()
 
             try:
+                """try charging customer card/address details with amount due"""
                 customer = stripe.Charge.create(
                     amount=int(total * 100),
                     currency="EUR",
@@ -49,20 +55,25 @@ def checkout(request, id):
                     card=payment_form.cleaned_data['stripe_id']
                 )
             except stripe.error.CardError:
+                """ on exception prompt user that card was declined"""
                 messages.error(request, "Your card was declined!")
 
             if customer.paid:
+                """ on successful payment, prompt user that they have paid """
                 messages.error(request, "You have successfully paid")
                 
                 for id,quantity in cart.items():
+                    """ for artefacts in cart, mark as sold when payment is successful """
                     artefact = get_object_or_404(Artefact, pk=id)
                     artefact.sold = True
                     artefact.save()
                     request.session['cart'] = {}
                 return redirect(reverse('for_sale_artefacts'))
             else:
+                """ if payment did not go through prompt user that it was not successful """
                 messages.error(request, "Unable to take payment")
         else:
+            """ if payment/customer forms are not valid, prompt user"""
             print(payment_form.errors)
             messages.error(
                 request, "We were unable to take a payment with that card!")

@@ -7,7 +7,7 @@ def view_cart(request):
     return render(request, "cart.html")
 
 def add_to_cart(request, id):
-    """Add 1 of item to the cart, as tehy are unique items"""
+    """Only add 1 of item to the cart, as they are unique items"""
     quantity = 1
 
     cart = request.session.get('cart', {})
