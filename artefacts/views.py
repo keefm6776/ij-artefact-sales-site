@@ -15,8 +15,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def for_sale_artefacts(request):
     """ Finds all unsold artefacts in the database and displays them """
+
     artefacts = Artefact.objects.filter(sold=False).order_by('-id')
-    
+
     page = request.GET.get('page', 1)
     paginator = Paginator(artefacts, 10)
 
@@ -140,3 +141,13 @@ def delete_artefact(request, id):
     """ Allows the Site Owner to delete the current artefact """
     Artefact.objects.filter(id=id).delete()
     return redirect(for_sale_artefacts)
+
+def past_orders(request):
+    """ Allows the Customer to view their previous orders """
+    current_user=request.user
+    user_orders = Order.objects.filter(customer_id=current_user.id)
+    past_orders = OrderLineItem.objects.filter(order_id__in=list(user_orders))
+    
+    no_of_orders = len(list(past_orders))
+
+    return render(request, "past_orders.html", {"artefacts": past_orders, "no_or_orders": no_of_orders})

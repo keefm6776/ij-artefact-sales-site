@@ -1,4 +1,6 @@
 <form method="post">
+    <!--Display User Form And Customer Form Info, for User to Edit 
+        Information Provided at sign up-->
   {% csrf_token %}
   {{ user_form.as_p }}
   {{ customer_form.as_p }}

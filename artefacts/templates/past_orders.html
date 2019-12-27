@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<h2>Your Past Orders:</h2>
+
+<div class="row row-flex center-block">
+	<!--Display artefacts returned by the past orders view, for the current user-->
+    {% for artefact in artefacts %}
+
+	<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
+		<div class="panel-body">
+		    {%if artefact.image%}
+            <!--If artefact has an image display it-->
+			<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="max-width:80%;height:200px;object-fit: contain;" />
+			{%else%}
+            <!--If artefact does not have an image, display site dummy image-->
+			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="max-width:80%;height:200px;object-fit: contain;" />
+            {%endif%}
+
+            <!--display artefact name, first 10 words of its description-->
+            <div class="artefact-name-container">
+			    <h3>{{ artefact.name }}</h3>
+            </div>
+			
+            <p class="artefact-description">{{ artefact.description|truncatewords:10 }}</p>
+			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
+			<p>
+				<!--display artefact price-->
+                <h3> Buy Now: € {{ artefact.price }}</h3>
+			</p>
+			
+		</div>
+		<!--panel-body-->
+	</div>
+	<!--grid-->
+
+	{% endfor %}
+
+</div>
+<!--row row-flex-->
+
+{% if artefacts.has_other_pages %}
+<!-- If there is more than one page of artefacts display relevant navigation-->
+<!-- To previous, next and individual page numbers-->
+<ul class="pagination">
+	{% if artefacts.has_previous %}
+	<li><a href="?page={{ artefacts.previous_page_number }}">&laquo;</a></li>
+	{% else %}
+	<li class="disabled"><span>&laquo;</span></li>
+	{% endif %}
+	{% for i in artefacts.paginator.page_range %}
+	{% if artefacts.number == i %}
+	<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+	{% else %}
+	<li><a href="?page={{ i }}">{{ i }}</a></li>
+	{% endif %}
+	{% endfor %}
+	{% if artefacts.has_next %}
+	<li><a href="?page={{ artefacts.next_page_number }}">&raquo;</a></li>
+	{% else %}
+	<li class="disabled"><span>&raquo;</span></li>
+	{% endif %}
+</ul>
+{% endif %}
+<!-- Pagination -->
+
+{% endif %}
+{% endblock %}

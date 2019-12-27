@@ -10,13 +10,16 @@
 		<div class="ArtefactSearch-body display center-block">
 			<form name="ArtefactSearch" action="{% url 'do_search_for_sale' %}" method="get"
 				class="center-block text-center form-padding">
-				<p>Name: </p>
+				<!--Allow user to search for a specific artefact name-->
+                <p>Name: </p>
                 <p><input type="text" name="artefact_name"></p>
-					<p>Centuries Between</p>
+					<!--Allow User to search for artefacts between inputted centuries-->
+                    <p>Centuries Between</p>
 					<p><input type="number" min="0" name="low_artefact_century" value="0"> </p>
 						<p>And</p>
 						<input type="number" min="0" name="high_artefact_century" value="100">
 
+                        <!--Allow user to serch for artefacts of an inputted era, AD or BC-->
 						<p>Era:</p>
 							<select name="artefact_era">
                                 <option value="AD">AD</option>
@@ -37,32 +40,42 @@
 <h2>Artefacts For Sale:</h2>
 
 <div class="row row-flex center-block">
-	{% for artefact in artefacts %}
+	<!--Display artefacts returned by for_sale_artefacts view-->
+    {% for artefact in artefacts %}
 
 	<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
 		<div class="panel-body">
 		    {%if artefact.image%}
+            <!--If artefact has an image display it-->
 			<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="max-width:80%;height:200px;object-fit: contain;" />
 			{%else%}
+            <!--If artefact does not have an image, display site dummy image-->
 			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="max-width:80%;height:200px;object-fit: contain;" />
             {%endif%}
 
             <div class="artefact-name-container">
+                <!--display artefact name, first 10 words of its description-->
 			    <h3>{{ artefact.name }}</h3>
             </div>
 			
             <p class="artefact-description">{{ artefact.description|truncatewords:10 }}</p>
+            <!--allow user to read the full detail of the artefact by clicking 'Read More'-->
 			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
 			<p>
+                <!--display artefact price-->
 				<h3> Buy Now: € {{ artefact.price }}</h3>
 			</p>
 
 
 			{% if user.is_staff %}
+            <!--If User is a member of staff give them the option to edit 
+            or delete this the selected artefact once it is still for sale.-->
 			<p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-info">Edit</a></p>
 			<p><a href="{% url 'delete_artefact' artefact.id %}" class="btn btn-danger">Delete</a></p>
 
 			{% else %}
+            <!--If User is a customer only allow them to add 1 item to the cart (As they are unique)
+            and hence purchase if they wish.-->
 			<form method="post" action="{% url 'add_to_cart' artefact.id %}">
 				{% csrf_token %}
 				<div class="input-group">
@@ -74,6 +87,7 @@
 				<!--input-group-->
 				<h5>NB, Artefacts Are unique, So Only One Can Be Added.</h5>
 				<h3>Or</h3>
+                <!--If User is a customer only allow them to bid on this item-->
 				<p><a href="{% url 'make_bid' artefact.id %}" class="btn btn-primary">Bid</a></p>
 			</form>
 			{% endif %}
@@ -89,6 +103,9 @@
 <!--row row-flex-->
 
 {% if artefacts.has_other_pages %}
+<!-- If there is more than one page of artefacts display relevant navigation-->
+<!-- To previous, next and individual page numbers-->
+
 <ul class="pagination">
 	{% if artefacts.has_previous %}
 	<li><a href="?page={{ artefacts.previous_page_number }}">&laquo;</a></li>
