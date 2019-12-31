@@ -251,11 +251,98 @@ I have made regular Git Commits during my project for version control and also t
 			
 5.	To commit these to git, the command "git commit -m "messsage"", was used.  With a meaningful message about the commit inside the "".
 			
-6.	To link the my github account, I used the following: git remote add origin               https://github.com/keefm6776/ij-artefact-sales-site.git
+6.	To link the my github account, I used the following: git remote add origin https://github.com/keefm6776/ij-artefact-sales-site.git
 			
-7.	To push each commit to github I used : git push -u origin master 
+7.	To push each commit to github I used : git push -u origin master.  Each time a new version was committed to github, Travis-CI would run the required tests on the new version.
 			
 8.	For each subsequent commit I repeated steps 3, 4, 5 & 7.
+
+## Static Files
+
+I used AWS buckets to store static files.  This includes:
+
+1.  My custom css file.
+2.  Images uploaded to display with the artefacts.
+3.  Javascript for Stripe and my custom javascript.
+4.  Font-Awesome CSS and Font Files.
+
+To create a bucket, I had to:
+
+1.  Create an account with aws.amazon.com.
+2.  In the find services search box, I searched for S3 (Scalable storage in the cloud)
+3.  Once in S3 buckets I clicked the blue "Create Bucket" Button.
+4.  I gave my bucket a unique name and selected the region closest to me ie EU (Ireland), and clieked next.
+5.  On the next page as there is nothing that I needed to change, so I just clicked next.
+6.  On this page I unchecked the "Block all public access" option and clicked next.
+7.  I then clicked create bucket.
+
+Once the bucket was created:
+
+1.  I opened the bucket by clicking on its name.
+2.  I selected the Properties tab.
+3.  I then cliked on Static Website Hosting, and selected "Use this bucket to host a website"
+4.  I then entered "index.html" and "error.html" for the index and error documnets respectively.
+5.  Now I saved this information.
+6.  Next I selected the permissions tab, and then the "CORS configuration" button.
+7.  I then copied and pasted the provided configuration into the editor, ie:
+    
+    CORS Configuration
+    <CORSConfiguration>
+    <CORSRule>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <MaxAgeSeconds>3000</MaxAgeSeconds>
+    <AllowedHeader>Authorization</AllowedHeader>
+    </CORSRule>
+    </CORSConfiguration>
+
+8.  Then I selected "bucket policy" and copied and pasted the provided policy into the editor, ie:
+
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::ij-artefact-sales/*"
+        }
+    ]
+}
+
+    However, the "Resource": information was copied and pasted from above the editor where my ARN was displayed. Leaving the '/*' at the end of the ARN.
+
+9.  After this, I cliked "save" to save all this information.
+10. Once the bucket information was saved I went back to the main AWS page and searched for 'IAM'
+11. Once in IAM I selected the Groups option from the Left hand menu, and selected the blue "Create Group" button.
+12. For step one, I gave my group a relevant name, ie 'ij-artefact-sales-group'.
+13. For step two, I just clicked the 'next' button.
+14. For step three, I just clicked the 'create group' button.
+15. Next I clicked 'policies' from the left hand menu, and then selected the 'JSON' tab.
+16. Next I clikced the 'import managed policy' link at the top right of the editor.
+17. I searched for S3 and selected the 'AmazonS3FullAccess' policy.
+18. This inputted a generic policy and I replace the "*" for "Resource" with a list, which was 
+    my ARN from before followed by a comma, then this ARN again followed by '/*' ie [ARN, ARN/*]
+19. I then clicked the 'Review Policy' Button, and gave it a name associated with my bucket, ie 'ij-artefact-sales-policy', followed by clicking the 'create policy' button.
+20. I then went back to the group that I created earlier, so I selected 'Groups' from the left hand menu,
+    and selected the 'ij-artefact-sales-group' link.
+21. I then selected the 'Permissions' tab, clicked 'attach a policy'
+22. I then searched for the 'ij-artefact-sales-policy' that I created, checked it and clicked 'attach policy'
+23. This now meant that I could create a user, by selecting 'Users' from the left hand menu.
+24. Again, I gave a relevant name, ie 'ij-artefact-sales-user' and checked the 'Programmatic access' option.
+25. I then clicked the 'Next: Permissions' button, and selected my group ie 'ij-artefact-sales-group' and clicked the 'Next:tags' button
+26. No keys were required so I clicked the 'Next: Review' button, followed by the 'create user' button on the next screen.
+27. I then clicked the 'Download .csv' button.
+
+
+
+
+
+
+
+
+
 
 ## Deployment
 
@@ -283,6 +370,8 @@ Along with:
 6.  SECRET_KEY
 7.  AWS_ACCESS_KEY_ID       -   For S3 Bucket
 8.  AWS_SECRET_ACCESS_KEY   -   For S3 Bucket
+
+Also in Heroku I have set up the deployment method o be done via GitHub, and enabled automtic deployments when a new version is pushed to the master branch.  However deployment will not go ahead until the Travis-CI tests have passed.
             
 I have also a local copy of these in a file called env.py, which is not being committed to Git/Github that allows me to run my project locally.
 
@@ -303,6 +392,12 @@ I have used the site completing each path that can be followed by a user through
 checkout and I have also manually tested each link on the site.
 
 **Automated Testing:**
+
+Using Travis-ci:
+
+By linking my GitHub reppository for this project to travis-ci.org, I have been able to check out 
+the relevant branch and run the commands specified in .travis.yml, building the software and running
+any automated tests.
 
 Using the Django testing suite I have:
 

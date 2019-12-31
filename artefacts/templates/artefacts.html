@@ -53,20 +53,19 @@
 			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="max-width:80%;height:200px;object-fit: contain;" />
             {%endif%}
 
-            <div class="artefact-name-container">
-                <!--display artefact name, first 10 words of its description-->
+            <div id="artefact-name-container">
+                <!--display artefact name, first 7 words of its description-->
 			    <h3>{{ artefact.name }}</h3>
             </div>
 			
-            <p class="artefact-description">{{ artefact.description|truncatewords:10 }}</p>
+            <p class="artefact-description">{{ artefact.description|truncatewords:7 }}</p>
             <!--allow user to read the full detail of the artefact by clicking 'Read More'-->
 			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
-			<p>
+			
                 <!--display artefact price-->
-				<h3> Buy Now: € {{ artefact.price }}</h3>
-			</p>
-
-
+				<p><h4>Buy Now: </h4></p>
+                <p><h3>€ {{ artefact.price }}</h3></p>
+			
 			{% if user.is_staff %}
             <!--If User is a member of staff give them the option to edit 
             or delete this the selected artefact once it is still for sale.-->
