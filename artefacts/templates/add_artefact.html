@@ -8,7 +8,7 @@
 	<div class="add-artefact">
 		<h1>Add Artefact:</h1>
 
-		<form class="form-padding" method="POST" enctype="multipart/form-data">
+		<form name="add-artefact-form" onsubmit="return validateForm()" class="form-padding" method="POST" enctype="multipart/form-data">
 			<!-- give blank artefact form so user can save new artefact-->
             {% csrf_token %} {{ form|as_bootstrap }}
             <button type="submit" class="btn btn-success">Save</button>
