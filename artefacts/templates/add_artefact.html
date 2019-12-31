@@ -12,7 +12,7 @@
 			<!-- give blank artefact form so user can save new artefact-->
             {% csrf_token %} {{ form|as_bootstrap }}
             <button type="submit" class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-danger" onclick="window.history.back()" >Exit</button>
+            <button type="button" class="btn btn-danger" onclick="exitPage()" >Exit</button>
 		</form>
 	</div><!-- add-artefact -->
 </div><!-- add-artefact-container -->

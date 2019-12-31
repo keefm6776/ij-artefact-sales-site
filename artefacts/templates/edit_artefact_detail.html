@@ -12,7 +12,7 @@
                         by clicking save or discard the changes by clicking exit.-->
 					{% csrf_token %} {{ form|as_bootstrap }}
 					<button type="submit" class="btn btn-success">Save</button>
-					<button type="button" class="btn btn-danger" onclick="window.history.back()" >Exit</button>
+					<button type="button" class="btn btn-danger" onclick="exitPage()" >Exit</button>
 				</form>
 			</div>
 			<!--card-->
