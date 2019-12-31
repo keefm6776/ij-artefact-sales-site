@@ -31,7 +31,7 @@ def make_bid(request, pk):
         """if the form input is valid"""
         if form.is_valid():
             """if the bid made is greater than the current one"""
-            if form.cleaned_data["bid"] > highest_bid:
+            if (form.cleaned_data["bid"] > highest_bid) and (form.cleaned_data["bid"] > 0):
                 """save the new highest bid with the customer and artefact info"""
                 form = form.save(commit=False)
                 form.customer_id = customer
@@ -39,8 +39,12 @@ def make_bid(request, pk):
                 form.save()
                 return redirect(for_sale_artefacts)
             else:
-                """if bid is not greater than highest bid, then prompt user of this"""
-                form.add_error(None, "Your bid must be greater than the current highest bid")
+                """if bid is not greater than highest bid or zero/negative, then prompt user of this"""
+                if (form.cleaned_data["bid"] <= highest_bid):
+                    form.add_error(None, "Your bid must be greater than the current highest bid!")
+
+                if (form.cleaned_data["bid"] <= 0):
+                    form.add_error(None, "Your bid cannot be zero or negative!")
         else:
             form = BidsForm()
             return redirect(for_sale_artefacts)

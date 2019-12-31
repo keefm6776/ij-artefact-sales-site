@@ -82,12 +82,18 @@ def add_artefact(request):
     form = ArtefactForm(request.POST, request.FILES)
     if request.method == "POST":
         if form.is_valid():
-            """If century is valid, ie not zero or -ve"""
-            if form.cleaned_data["century"] > 0:
+            """If century and price are valid, ie not zero or -ve"""
+            if ((form.cleaned_data["century"] > 0) and (form.cleaned_data["price"] > 0) and (form.cleaned_data["name"] != '')):
                 form.save()
                 return redirect(for_sale_artefacts)
             else:
-                form.add_error(None, "The Century Cannot be negative or zero!")
+                if (form.cleaned_data["century"] <= 0):
+                    form.add_error(None, "The Century Cannot be negative or zero!")
+                if (form.cleaned_data["price"] <= 0):
+                    form.add_error(None, "The Price Set Cannot be negative or zero!")      
+                if (form.cleaned_data["name"] == ''):
+                    form.add_error(None, "The name field cannot be left blank!")
+                         
         else:
             form = ArtefactForm()
             return redirect(for_sale_artefacts)
@@ -97,18 +103,29 @@ def add_artefact(request):
 def edit_artefact_detail(request, id):
     """ Displays the selected Artefact to the Site Owner for editing """
     artefact = get_object_or_404(Artefact, pk=id)
-    """create form with selected artefact's details deisplayed"""
+    """create form with selected artefact's details displayed"""
     form = ArtefactForm(instance=artefact)
 
     if request.method == "POST":
         form = ArtefactForm(request.POST, instance=artefact)
         if form.is_valid():
-            """If century is valid, ie not zero or -ve"""
-            if form.cleaned_data["century"] > 0:
+            """If century and price are valid, ie not zero or -ve"""
+            if ((form.cleaned_data["century"] > 0) and (form.cleaned_data["price"] > 0) and (form.cleaned_data["name"] != '') and (form.cleaned_data["description"] != '') and (form.cleaned_data["history"] != '') and ((form.cleaned_data["era"] == 'AD') or (form.cleaned_data["AD"] == 'BC'))):
                 form.save()
                 return redirect(for_sale_artefacts)
             else:
-                form.add_error(None, "The Century Cannot be negative or zero!")
+                if (form.cleaned_data["century"] <= 0):
+                    form.add_error(None, "The Century Cannot be negative or zero!")
+                if (form.cleaned_data["price"] <= 0):
+                    form.add_error(None, "The Price Set Cannot be negative or zero!")
+                if (form.cleaned_data["name"] == ''):
+                    form.add_error(None, "The name field cannot be left blank!")
+                if (form.cleaned_data["description"] == ''):
+                    form.add_error(None, "The description field cannot be left blank!") 
+                if (form.cleaned_data["history"] == ''):
+                    form.add_error(None, "The history field cannot be left blank!") 
+                if ((form.cleaned_data["era"] != 'AD') and (form.cleaned_data["era"] != 'BC')):
+                    form.add_error(None, "The era can only be AD (Anno Domini) or BC (Before Christ)!")
     else:
         form = ArtefactForm(instance=artefact)
 

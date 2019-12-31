@@ -5,7 +5,7 @@ from ecommerce import settings
 
 
 class Artefact(models.Model):
-    name = models.CharField(max_length=254, default='', blank=False, help_text="Name Of Artefact Being Sold")
+    name = models.CharField(max_length=254, default='', blank=False)
     history = models.TextField(blank=False)
     description = models.TextField(blank=False)
     century = models.DecimalField(max_digits=5, decimal_places=0, blank=False)
