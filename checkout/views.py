@@ -15,17 +15,16 @@ import stripe
 
 stripe.api_key = settings.STRIPE_SECRET
 
-
 @login_required()
 def checkout(request, id):
     """get customer object for current user"""
     customer_object = get_object_or_404(Customer, pk=id)
-    """initialise order and makepayment forms"""
+    """initialise Order and Payment forms"""
     order_form = OrderForm(request.POST)
     payment_form = MakePaymentForm(request.POST)
 
     if request.method == "POST":
-        """ if both order form and payment forms are valid """
+        """ if both Order form and payment forms are valid """
         if order_form.is_valid() and payment_form.is_valid():
             """save order information with date and customer info"""
             order = order_form.save(commit=False)

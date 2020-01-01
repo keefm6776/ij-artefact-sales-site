@@ -3,13 +3,11 @@ from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from bids.models import Bids
 from artefacts.models import Artefact
 from checkout.models import OrderLineItem, Order
+from customer.models import Customer
 from .forms import ArtefactForm
 from weasyprint import HTML
-from operator import itemgetter
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -175,12 +173,14 @@ def delete_artefact(request, id):
     Artefact.objects.filter(id=id).delete()
     return redirect(for_sale_artefacts)
 
-def past_orders(request):
+def past_purchases(request):
     """ Allows the Customer to view their previous orders """
-    current_user=request.user
-    user_orders = Order.objects.filter(customer_id=current_user.id)
-    past_orders = OrderLineItem.objects.filter(order_id__in=list(user_orders))
+    current_user = request.user
+    current_customer = Customer.objects.filter(user=current_user.id)
+    user_orders = Order.objects.filter(customer_id=current_customer)
+    past_purchases = OrderLineItem.objects.filter(order_id__in=list(user_orders)).values('artefact')
+    artefacts_sold_to_user = Artefact.objects.filter(id__in=past_purchases)
+    print(past_purchases)
+    no_of_purchases = len(list(artefacts_sold_to_user))
     
-    no_of_orders = len(list(past_orders))
-
-    return render(request, "past_orders.html", {"artefacts": past_orders, "no_or_orders": no_of_orders})
+    return render(request, "past_purchases.html", {"artefacts": artefacts_sold_to_user, "no_of_purchases": no_of_purchases})
