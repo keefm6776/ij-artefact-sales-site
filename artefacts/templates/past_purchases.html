@@ -13,10 +13,10 @@
 		<div class="panel-body">
 		    {%if artefact.image%}
             <!--If artefact has an image display it-->
-			<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="max-width:80%;height:200px;object-fit: contain;" />
+			<img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image"/>
 			{%else%}
             <!--If artefact does not have an image, display site dummy image-->
-			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="max-width:80%;height:200px;object-fit: contain;" />
+			<img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection"/>
             {%endif%}
 
             <!--display artefact name, first 10 words of its description-->
@@ -28,7 +28,7 @@
 			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
 			<p>
 				<!--display artefact price-->
-                <h3> Buy Now: € {{ artefact.price }}</h3>
+                <h3> PRICE PAID: € {{ artefact.price }}</h3>
 			</p>
 			
 		</div>

@@ -21,10 +21,10 @@
 		<div class="panel-body">
 			{%if artefact.image%}
                 <!--If artefact has an image, display it-->
-    			<img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="max-width:80%;max-height:200px;object-fit: contain;" />
+    			<img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image"/>
 			{%else%}
                 <!--If the artefact does not have an image, display the default site image-->
-	    		<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="max-width:80%;max-height:200px;object-fit: contain;" />
+	    		<img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection"/>
             {%endif%}
 
 			<div class="caption">

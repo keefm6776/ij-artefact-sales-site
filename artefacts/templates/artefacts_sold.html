@@ -48,19 +48,22 @@
 		<div class="panel-body">
 			{%if artefact.image%}
             <!--If artefact has an image display it-->
-            <img src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" style="max-width:80%;max-height:200px;object-fit: contain;" />
+            <img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image"/>
 			{%else%}
             <!--If artefact does not have an image, display site dummy image-->
-			<img src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" style="max-width:80%;max-height:200px;object-fit: contain;" />
+			<img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection"/>
             {%endif%}
 
-			<!--display artefact name, first 10 words of its description-->
-            <h3>{{ artefact.name }}</h3>
-			<p class="artefact-description">{{ artefact.description|truncatewords:10 }}</p>
+            <div id="artefact-name-container">
+                <!--display artefact name, first 7 words of its description-->
+			    <h3>{{ artefact.name }}</h3>
+            </div>
+			
+            <p class="artefact-description">{{ artefact.description|truncatewords:7 }}</p>
             <!--allow user to read the full detail of the artefact by clicking 'Read More'-->
 			<p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
 			<!--display artefact price-->
-            <p>{{ artefact.price }}</p>
+            <p><h3>€ {{ artefact.price }}</h3></p>
             
             <!-- despatch item by clicking Despatch button, marking it as despatched and -->
 			<!-- creating a despatch note which is displayed/saved as a pdf file-->
