@@ -15,8 +15,8 @@ class Artefact(models.Model):
         ('BC', 'Before Christ'),
     )
     era = models.CharField(max_length=2, choices=ERA_CHOICES, blank=True)
-    image = models.ImageField(upload_to='static', blank=True, null=True)
-    price = models.DecimalField(max_digits=9, decimal_places=2)
+    image = models.ImageField(upload_to='static', blank=True)
+    price = models.DecimalField(max_digits=9, decimal_places=2, blank=True)
     sold = models.BooleanField(default=False)
     despatched = models.BooleanField(default=False)
     despatch_date = models.DateField(null=True, blank=True)
