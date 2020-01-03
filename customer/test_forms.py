@@ -48,40 +48,40 @@ class TestCustomerForm(TestCase):
     
     def test_correct_message_for_full_name(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['full_name'], [u'This field is required.'])
     
     def test_correct_message_for_street_Address1(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['street_Address1'], [u'This field is required.'])
     
     def test_correct_message_for_street_Address2(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['street_Address2'], [u'This field is required.'])
     
     def test_correct_message_for_town_or_city(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['town_or_city'], [u'This field is required.'])
     
     def test_correct_message_for_county(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['county'], [u'This field is required.'])
     
     def test_correct_message_for_country(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['country'], [u'This field is required.'])
     
     def test_correct_message_for_postcode(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['postcode'], [u'This field is required.'])
     
     def test_correct_message_for_phone_number(self):
         form = CustomerForm({'form': ''})
-        self.assertFalse(form.is_valid())
+        form.is_valid()
         self.assertEqual(form.errors['phone_number'], [u'This field is required.'])
