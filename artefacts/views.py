@@ -18,7 +18,7 @@ def for_sale_artefacts(request):
 
     """initiate paginator"""
     page = request.GET.get('page', 1)
-    paginator = Paginator(artefacts, 10)
+    paginator = Paginator(artefacts, 12)
 
     try:
         artefacts = paginator.page(page)
@@ -38,7 +38,7 @@ def sold_artefacts(request):
 
     """inititate paginator"""
     page = request.GET.get('page', 1)
-    paginator = Paginator(artefacts, 10)
+    paginator = Paginator(artefacts, 12)
 
     try:
         artefacts = paginator.page(page)
@@ -57,7 +57,7 @@ def despatched_artefacts(request):
 
     """initiate paginator"""
     page = request.GET.get('page', 1)
-    paginator = Paginator(artefacts, 10)
+    paginator = Paginator(artefacts, 12)
 
     try:
         artefacts = paginator.page(page)
@@ -88,9 +88,15 @@ def add_artefact(request):
                 if (form.cleaned_data["century"] <= 0):
                     form.add_error(None, "The Century Cannot be negative or zero!")
                 if (form.cleaned_data["price"] <= 0):
-                    form.add_error(None, "The Price Set Cannot be negative or zero!")      
+                    form.add_error(None, "The Price Set Cannot be negative or zero!")
                 if (form.cleaned_data["name"] == ''):
                     form.add_error(None, "The name field cannot be left blank!")
+                if (form.cleaned_data["description"] == ''):
+                    form.add_error(None, "The description field cannot be left blank!") 
+                if (form.cleaned_data["history"] == ''):
+                    form.add_error(None, "The history field cannot be left blank!") 
+                if ((form.cleaned_data["era"] != 'AD') and (form.cleaned_data["era"] != 'BC')):
+                    form.add_error(None, "The era can only be AD (Anno Domini) or BC (Before Christ)!")
                          
         else:
             form = ArtefactForm()
@@ -180,7 +186,17 @@ def past_purchases(request):
     user_orders = Order.objects.filter(customer_id=current_customer)
     past_purchases = OrderLineItem.objects.filter(order_id__in=list(user_orders)).values('artefact')
     artefacts_sold_to_user = Artefact.objects.filter(id__in=past_purchases)
-    print(past_purchases)
     no_of_purchases = len(list(artefacts_sold_to_user))
+
+    """initiate paginator"""
+    page = request.GET.get('page', 1)
+    paginator = Paginator(artefacts_sold_to_user, 12)
+
+    try:
+        artefacts = paginator.page(page)
+    except PageNotAnInteger:
+        artefacts = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
     
     return render(request, "past_purchases.html", {"artefacts": artefacts_sold_to_user, "no_of_purchases": no_of_purchases})
