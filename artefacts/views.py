@@ -164,7 +164,6 @@ def despatch_artefact(request, id):
     """mark the despatched date as today"""
     artefact.despatch_date = timezone.now()
     artefact.save()
-
     
     order_line_info = OrderLineItem.objects.filter(artefact__pk=id)
     """find the order line which includes the despatching artefact"""

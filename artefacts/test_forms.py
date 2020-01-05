@@ -37,53 +37,43 @@ class TestArtefactForm(TestCase):
     # Test that the gives the correct error on missing information
     
     def test_correct_message_for_missing_name(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['name'][0], [u'This field is required.'])
+        form = ArtefactForm({'name': ''})
+        self.assertEqual(form.errors['name'], [u'This field is required.'])
     
     def test_correct_message_for_missing_description(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['description'][0], [u'This field is required.'])
+        form = ArtefactForm({'description': ''})
+        self.assertEqual(form.errors['description'], [u'This field is required.'])
 
     def test_correct_message_for_missing_history(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['history'][0], [u'This field is required.'])
+        form = ArtefactForm({'history': ''})
+        self.assertEqual(form.errors['history'], [u'This field is required.'])
     
     def test_correct_message_for_missing_era(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['era'][0], [u'This field is required.'])
+        form = ArtefactForm({'era': ''})
+        self.assertEqual(form.errors['era'], [u'This field is required.'])
     
     def test_correct_message_for_missing_price(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['price'][0], [u'This field is required.'])
+        form = ArtefactForm({'price': ''})
+        self.assertEqual(form.errors['price'], [u'This field is required.'])
     
     def test_correct_message_for_missing_century(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['century'][0], [u'This field is required.'])
+        form = ArtefactForm({'century': ''})
+        self.assertEqual(form.errors['century'], [u'This field is required.'])
 
-# Test that the gives the correct error on missing information
+# Test that the gives the correct error on incorrect information
     
     def test_correct_message_for_price_of_zero(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['price'][0], [u'The Price Set Cannot be negative or zero!'])
+        form = ArtefactForm({'form': 0})
+        self.assertEqual(form.errors['price'], [u'The Price Set Cannot be negative or zero!'])
     
     def test_correct_message_for_negative_price(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['price'][0], [u'The Price Set Cannot be negative or zero!'])
+        form = ArtefactForm({'price': -1})
+        self.assertEqual(form.errors['price'], [u'The Price Set Cannot be negative or zero!'])
     
     def test_correct_message_for_century_of_zero(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['century'][0], [u'The Century Cannot be negative or zero!'])
+        form = ArtefactForm({'century': 0})
+        self.assertEqual(form.errors['century'], [u'The Century Cannot be negative or zero!'])
     
     def test_correct_message_for_negative_century(self):
-        form = ArtefactForm({'form': ''})
-        form.is_valid()
-        self.assertEqual(form.errors['century'][0], [u'The Century Cannot be negative or zero!'])
+        form = ArtefactForm({'century': -1})
+        self.assertEqual(form.errors['century'], [u'The Century Cannot be negative or zero!'])
