@@ -171,7 +171,7 @@ def despatch_artefact(request, id):
     order_id = Order.objects.filter(orderlineitem=order_line_info)
     """find the order details for this artefact"""
     delivery = get_object_or_404(Order, pk=order_id)
-"""get the delivery details for this artefact"""
+    """get the delivery details for this artefact"""
    
     """Create despatch note in pdf format, for printing/daving"""
     artefact_info = {"name": artefact.name,
@@ -206,9 +206,10 @@ def past_purchases(request):
     """ Find current user info using current user """
     user_orders = Order.objects.filter(customer_id=current_customer)
     """ Find orders processed for the current user """
+    print(user_orders)
     past_purchases = OrderLineItem.objects.filter(order_id__in=list(user_orders)).values('artefact')
     """ Find the artefact ids that are contained in these orders """
-
+    print(past_purchases)
     artefacts_sold_to_user = Artefact.objects.filter(id__in=past_purchases)
     """ Find the artefact information found in the orders """
     no_of_purchases = len(list(artefacts_sold_to_user))

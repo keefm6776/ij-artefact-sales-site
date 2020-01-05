@@ -2,36 +2,49 @@
 {% load static from staticfiles %}
 {% block content %}
 
-<div id="artefact-detail-image" class="center-block">
-	{%if artefact.image%}
-        <!--If artefact has an image, display it-->
-		<img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image"/>
-	{%else%}
-        <!--If artefact has no image, display dummy site image-->
-		<img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection"/>
-    {%endif%}
+<div class="row">
+	<div id="artefact-detail-container">
+		<div id="artefact-detail-image" class="col-12 col-md-3">
+			{%if artefact.image%}
+			    <!--If artefact has an image, display it-->
+			    <img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image"/>
+    	    {%else%}
+			    <!--If artefact has no image, display dummy site image-->
+		    	<img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection"/>
+            {%endif%}
+        </div>
+		<!--artefact-detail-image-->
 
-
-</div>
-	<!--artefact-detail-image-->
-
-	<div id="artefact-detail-body" class="row center-block">
-        <!--Display selected artefact's details to user -->
-		<h2>{{ artefact.name }}</h2>
-		<h4>Description:</h4>
-		<p>{{ artefact.description }}</p>
-		<br>
-		<p>
-			<h4>History:</h4>
-			<p>{{ artefact.history }}</p>
+		<div id="artefact-detail-body" class="col-12 col-offset-md-1 col-md-9">
+	    	<!--Display selected artefact's details to user -->
+			<h2>{{ artefact.name }}</h2>
 			<br>
-			<h4>Century:</h4> {{ artefact.century }} {{ artefact.era }}
+			<h3>Century: {{ artefact.century }} {{ artefact.era }}</h3>
 			<br>
-			<h4>Price: €</h4> {{ artefact.price }}
-			<br>
+			<h3>Price: € {{ artefact.price }}</h3>
+            <br>
+        </div>
+		<!--artefact-detail-body-->
 
-			<button type="button" class="btn btn-danger" onclick="exitPage()" >Exit</button>
-            <!--Allow user to exit out of artefact display page-->
+		<div class="row">
+			<div id="artefact-desc-hist" class="col-xs-12">
+		   		<h2>Description:</h2>
+	    		<p><h4>{{ artefact.description }}</h4></p>
+				<br>
+				<p>
+				<h2>History:</h2>
+				<p><h4>{{ artefact.history }}</h4></p>
+				<br>
+				<button type="button" class="btn btn-danger" onclick="exitPage()" >Exit</button>
+				<!--Allow user to exit out of artefact display page-->
+			</div>
+			<!--grid-->
+		</div>
+		<!--row-->
 	</div>
-	<!--artefact-detail-body-->
-	{% endblock %}
+	<!--artefact-detail-container-->
+</div>
+<!--row-->
+
+
+		{% endblock %}
