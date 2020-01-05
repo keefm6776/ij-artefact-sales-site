@@ -85,16 +85,22 @@ def add_artefact(request):
                 form.save()
                 return redirect(for_sale_artefacts)
             else:
+                """ When Century Is Negative or Zero give apropriate error """
                 if (form.cleaned_data["century"] <= 0):
                     form.add_error(None, "The Century Cannot be negative or zero!")
+                """ When Price Is Negative or Zero give apropriate error """
                 if (form.cleaned_data["price"] <= 0):
                     form.add_error(None, "The Price Set Cannot be negative or zero!")
+                """ When Name is left blank give apropriate error, if not caught by HTML5 """
                 if (form.cleaned_data["name"] == ''):
                     form.add_error(None, "The name field cannot be left blank!")
+                """ When description is left blank give apropriate error, if not caught by HTML5 """
                 if (form.cleaned_data["description"] == ''):
                     form.add_error(None, "The description field cannot be left blank!") 
+                """ When history is left blank give apropriate error, if not caught by HTML5 """
                 if (form.cleaned_data["history"] == ''):
                     form.add_error(None, "The history field cannot be left blank!") 
+                """ When era is not AD or BC give apropriate error"""    
                 if ((form.cleaned_data["era"] != 'AD') and (form.cleaned_data["era"] != 'BC')):
                     form.add_error(None, "The era can only be AD (Anno Domini) or BC (Before Christ)!")
                          
@@ -113,23 +119,35 @@ def edit_artefact_detail(request, id):
     if request.method == "POST":
         form = ArtefactForm(request.POST, instance=artefact)
         if form.is_valid():
-            """If century and price are valid, ie not zero or -ve"""
-            if ((form.cleaned_data["century"] > 0) and (form.cleaned_data["price"] > 0) and (form.cleaned_data["name"] != '') and (form.cleaned_data["description"] != '') and (form.cleaned_data["history"] != '') and ((form.cleaned_data["era"] == 'AD') or (form.cleaned_data["AD"] == 'BC'))):
+            if ((form.cleaned_data["century"] > 0) and (form.cleaned_data["price"] > 0) and (form.cleaned_data["name"] != '') and (form.cleaned_data["description"] != '') and (form.cleaned_data["history"] != '') and ((form.cleaned_data["era"] == 'AD') or (form.cleaned_data["era"] == 'BC'))):
                 form.save()
+                """If century and price are valid, ie not zero or -ve"""
                 return redirect(for_sale_artefacts)
             else:
+                
                 if (form.cleaned_data["century"] <= 0):
                     form.add_error(None, "The Century Cannot be negative or zero!")
+                """ If century is negative or zero display appropriate error """
+                
                 if (form.cleaned_data["price"] <= 0):
                     form.add_error(None, "The Price Set Cannot be negative or zero!")
+                """ If price is negative or zero display appropriate error """
+                
                 if (form.cleaned_data["name"] == ''):
                     form.add_error(None, "The name field cannot be left blank!")
+                """ When Name is left blank give apropriate error, if not caught by HTML5 """
+                
                 if (form.cleaned_data["description"] == ''):
                     form.add_error(None, "The description field cannot be left blank!") 
+                """ When Description is left blank give apropriate error, if not caught by HTML5 """
+                
                 if (form.cleaned_data["history"] == ''):
                     form.add_error(None, "The history field cannot be left blank!") 
+                """ When History is left blank give apropriate error, if not caught by HTML5 """
+                
                 if ((form.cleaned_data["era"] != 'AD') and (form.cleaned_data["era"] != 'BC')):
                     form.add_error(None, "The era can only be AD (Anno Domini) or BC (Before Christ)!")
+                """ When ERA is not either AD or BC give apropriate error """
     else:
         form = ArtefactForm(instance=artefact)
 
@@ -147,13 +165,13 @@ def despatch_artefact(request, id):
     artefact.despatch_date = timezone.now()
     artefact.save()
 
-    """find the order line which includes the despatching artefact"""
+    
     order_line_info = OrderLineItem.objects.filter(artefact__pk=id)
-    """find the order details for this artefact"""
+    """find the order line which includes the despatching artefact"""
     order_id = Order.objects.filter(orderlineitem=order_line_info)
-    """get the delivery details for this artefact"""
+    """find the order details for this artefact"""
     delivery = get_object_or_404(Order, pk=order_id)
-
+"""get the delivery details for this artefact"""
    
     """Create despatch note in pdf format, for printing/daving"""
     artefact_info = {"name": artefact.name,
@@ -181,12 +199,20 @@ def delete_artefact(request, id):
 
 def past_purchases(request):
     """ Allows the Customer to view their previous orders """
+    
     current_user = request.user
+    """ Request Current User From Django """
     current_customer = Customer.objects.filter(user=current_user.id)
+    """ Find current user info using current user """
     user_orders = Order.objects.filter(customer_id=current_customer)
+    """ Find orders processed for the current user """
     past_purchases = OrderLineItem.objects.filter(order_id__in=list(user_orders)).values('artefact')
+    """ Find the artefact ids that are contained in these orders """
+
     artefacts_sold_to_user = Artefact.objects.filter(id__in=past_purchases)
+    """ Find the artefact information found in the orders """
     no_of_purchases = len(list(artefacts_sold_to_user))
+    """ Calculate the number of purchases made by this user to be displayed """
 
     """initiate paginator"""
     page = request.GET.get('page', 1)
