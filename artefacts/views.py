@@ -201,16 +201,19 @@ def past_purchases(request):
     
     current_user = request.user
     """ Request Current User From Django """
+    
     current_customer = Customer.objects.filter(user=current_user.id)
     """ Find current user info using current user """
+    
     user_orders = Order.objects.filter(customer_id=current_customer)
     """ Find orders processed for the current user """
-    print(user_orders)
+
     past_purchases = OrderLineItem.objects.filter(order_id__in=list(user_orders)).values('artefact')
     """ Find the artefact ids that are contained in these orders """
-    print(past_purchases)
-    artefacts_sold_to_user = Artefact.objects.filter(id__in=past_purchases)
+    
+    artefacts_sold_to_user = Artefact.objects.filter(id__in=past_purchases).order_by('-id')
     """ Find the artefact information found in the orders """
+    
     no_of_purchases = len(list(artefacts_sold_to_user))
     """ Calculate the number of purchases made by this user to be displayed """
 

@@ -63,17 +63,17 @@ class TestArtefactForm(TestCase):
 # Test that the gives the correct error on incorrect information
     
     def test_correct_message_for_price_of_zero(self):
-        form = ArtefactForm({'price': '0'})
+        form = ArtefactForm({'price': 0})
         self.assertEqual(form.errors['price'], [u'The Price Set Cannot be negative or zero!'])
     
     def test_correct_message_for_negative_price(self):
-        form = ArtefactForm({'price': '-1'})
+        form = ArtefactForm({'price': -1})
         self.assertEqual(form.errors['price'], [u'The Price Set Cannot be negative or zero!'])
     
     def test_correct_message_for_century_of_zero(self):
-        form = ArtefactForm({'century': '0'})
+        form = ArtefactForm({'century': 0})
         self.assertEqual(form.errors['century'], [u'The Century Cannot be negative or zero!'])
     
     def test_correct_message_for_negative_century(self):
-        form = ArtefactForm({'century': '-1'})
+        form = ArtefactForm({'century': -1})
         self.assertEqual(form.errors['century'], [u'The Century Cannot be negative or zero!'])
