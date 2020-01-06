@@ -3,9 +3,11 @@ to staff user when they mark an item as despatched-->
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>IJ Artefact Sales</title>
+    <title>IJ Artefact Sales</title>
 </head>
+
 <body>
     <p>{{ artefact_info.order.date }}</p>
     <br>
@@ -19,23 +21,23 @@ to staff user when they mark an item as despatched-->
     <p></p>
     <p>{{ artefact_info.order.delivery_phone_number }}</P>
     <br>
-    <br>   
-  Dear {{ artefact_info.order.delivery_full_name }},
-  <br>
-  <h3>Re: Purchase of {{ artefact_info.name }}</h3>
-  <br>
-  <p>Congratulations on your purchase of {{ artefact_info.name }}, it is with great pleasure that we enclose this purchase.</p>
-  <p>We hope that this will bring you many years of pleasure.</p>
-  <br>
-  <p>Your card has been debited for the amount of € {{ artefact_info.price }} (or your local equivalent) via stripe on our website. </P>
-  <br>
-  <p>Thanks & Regards</p>
-  <br>
-  <br>
-  <br>
-  <p>The Indiana Jones Artfact Team</p>
-  <p>Indy House, Phibsboro, Dublin, Ireland. D07 INDY
-  <br>>
-  <p>Telephone: +353 1 123-4567  Mon-Fri : 9am - 5pm (GMT) </p>
-  </body>
+    <br> Dear {{ artefact_info.order.delivery_full_name }},
+    <br>
+    <h3>Re: Purchase of {{ artefact_info.name }}</h3>
+    <br>
+    <p>Congratulations on your purchase of {{ artefact_info.name }}, it is with great pleasure that we enclose this purchase.</p>
+    <p>We hope that this will bring you many years of pleasure.</p>
+    <br>
+    <p>Your card has been debited for the amount of € {{ artefact_info.price }} (or your local equivalent) via stripe on our website. </P>
+    <br>
+    <p>Thanks & Regards</p>
+    <br>
+    <br>
+    <br>
+    <p>The Indiana Jones Artfact Team</p>
+    <p>Indy House, Phibsboro, Dublin, Ireland. D07 INDY
+        <br>>
+        <p>Telephone: +353 1 123-4567 Mon-Fri : 9am - 5pm (GMT) </p>
+</body>
+
 </html>

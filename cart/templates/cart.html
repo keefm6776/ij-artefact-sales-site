@@ -1,72 +1,69 @@
-{% extends 'base.html' %}
-{% load static from staticfiles %}
-{% load bootstrap_tags %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static from staticfiles %} {% load bootstrap_tags %} {% block content %}
 <div class="cart-container">
-	<div class="row row-flex">
+    <div class="row row-flex">
         <!--Display the items in the active cart to the user-->
-		{% for item in cart_items %}
+        {% for item in cart_items %}
 
-		<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-display">
-			<div id="cart-detail-body" class="row center-block">
-				<div class = "panel-body">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-display">
+            <div id="cart-detail-body" class="row center-block">
+                <div class="panel-body">
                     {%if artefact.image%}
                     <!--If the artefact has an image display it-->
-			        <img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image"/>
-			        {%else%}
+                    <img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" /> {%else%}
                     <!--If the artefact has no image, display the dummy site image-->
-			        <img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection"/>
-                    {%endif%}
+                    <img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" /> {%endif%}
 
-				<div class="caption">
-                    <div id="artefact-name-container">
-                    <!--display artefact name, first 7 words of its description-->
-			        <h3>{{ item.artefact.name }}</h3>
-                    </div> <!--artefact-name-container-->
-                                       
-                    <p class="artefact-description">{{ item.artefact.description|truncatewords:7 }}</p>
-					<!--allow user to read the full detail of the artefact by clicking 'Read More'-->
-                    <p><a href="{% url 'artefact_detail' item.artefact.id %}" class="btn btn-default">Read more</a></p>
-                    
-                    <!--display artefact price-->
-				    <p><h3>€ {{ item.artefact.price }}</h3></p>
+                    <div class="caption">
+                        <div id="artefact-name-container">
+                            <!--display artefact name, first 7 words of its description-->
+                            <h3>{{ item.artefact.name }}</h3>
+                        </div>
+                        <!--artefact-name-container-->
 
-					<form class="form-inline" method="post" action="{% url 'adjust_cart' item.id %}">
-						{% csrf_token %}
-						<div class="form-group">
-                            <!--Allow user to adjust quantity of item in cart. 0 to delete it-->
-							<label for="input-group" class="sr-only">New Qty</label>
-							<div class="input-group">
-								<div class="input-group-addon">Qty</div>
-								<input name="quantity" type="number" min="0" max="1" class="form-control">
-								<!--Display the current quantity in the cart to the user-->
-                                <div class="input-group-addon">{{item.quantity}}</div>
-							</div>
-						</div>
-						<!--submit the changes for the artefact in the cart-->
-                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Amend</button>
-					</form>
-					</p>
-				</div>
-                <!--caption-->
-                </div> <!-- panel-body-->
-				<h6>NB, Amend To Zero To Delete.</h6>
-			</div>
-			<!--id="cart-detail-body"-->
-		</div>
+                        <p class="artefact-description">{{ item.artefact.description|truncatewords:7 }}</p>
+                        <!--allow user to read the full detail of the artefact by clicking 'Read More'-->
+                        <p><a href="{% url 'artefact_detail' item.artefact.id %}" class="btn btn-default">Read more</a></p>
+
+                        <!--display artefact price-->
+                        <p>
+                            <h3>€ {{ item.artefact.price }}</h3>
+                        </p>
+
+                        <form class="form-inline" method="post" action="{% url 'adjust_cart' item.id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <!--Allow user to adjust quantity of item in cart. 0 to delete it-->
+                                <label for="input-group" class="sr-only">New Qty</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Qty</div>
+                                    <input name="quantity" type="number" min="0" max="1" class="form-control">
+                                    <!--Display the current quantity in the cart to the user-->
+                                    <div class="input-group-addon">{{item.quantity}}</div>
+                                </div>
+                            </div>
+                            <!--submit the changes for the artefact in the cart-->
+                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Amend</button>
+                        </form>
+                        </p>
+                    </div>
+                    <!--caption-->
+                </div>
+                <!-- panel-body-->
+                <h6>NB, Amend To Zero To Delete.</h6>
+            </div>
+            <!--id="cart-detail-body"-->
+        </div>
         <!--grid-->
-		{% endfor %}
-	</div>
+        {% endfor %}
+    </div>
     <!--row-row-flex-->
-	<div class="row">
-		<!--Display the total value of items added to the cart, so the
+    <div class="row">
+        <!--Display the total value of items added to the cart, so the
             User knows how much they will have to pay-->
         <p>Total</p>
-		<p><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>{{ total }}</p>
-		<a href="{% url 'checkout' user.customer.id %}" class="btn btn-success"
-			role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Checkout</a>
-	</div>
+        <p><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>{{ total }}</p>
+        <a href="{% url 'checkout' user.customer.id %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Checkout</a>
+    </div>
     <!--row-->
 </div>
 <!--cart-container-->

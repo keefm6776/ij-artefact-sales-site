@@ -1,28 +1,24 @@
-{% extends "base.html" %}
-{% load static from staticfiles %}
-{% block content %}
+{% extends "base.html" %} {% load static from staticfiles %} {% block content %}
 
 <div id="make-bid-image" class="center-block">
-	{%if artefact.image%}
-        <!-- If the artefact has an image display it for the bid page-->
-		<img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image"/>
-	{%else%}
-        <!-- If the artefact does not have an image display the dummy site image-->
-		<img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection"/>
-    {%endif%}
+    {%if artefact.image%}
+    <!-- If the artefact has an image display it for the bid page-->
+    <img class="artefact-image" src="{{ MEDIA_URL }}{{ artefact.image }}" alt="Artefact Image" /> {%else%}
+    <!-- If the artefact does not have an image display the dummy site image-->
+    <img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" /> {%endif%}
 </div>
-	<!--make-bid-image-->
+<!--make-bid-image-->
 
 <div id="make-bid-container">
     <!--Display the artefact name and highest bid for the user's information-->
-	<h2>Enter New Bid For: {{artefact.name}}</h2>
-	<h3>Highest Bid: €{{ highest_bid }}</h3>
-	<form method="POST" class="form-padding">
-		<!-- Allow the user to make a bid for the item-->
-        {% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit" class="btn btn-success">Bid Now!</button>
-           <button type="button" class="btn btn-danger" onclick="exitPage()" >Exit</button>
-	</form>
-</div><!--make-bid-container-->
+    <h2>Enter New Bid For: {{artefact.name}}</h2>
+    <h3>Highest Bid: €{{ highest_bid }}</h3>
+    <form method="POST" class="form-padding">
+        <!-- Allow the user to make a bid for the item-->
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Bid Now!</button>
+        <button type="button" class="btn btn-danger" onclick="exitPage()">Exit</button>
+    </form>
+</div>
+<!--make-bid-container-->
 {% endblock %}

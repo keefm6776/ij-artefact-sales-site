@@ -1,21 +1,15 @@
-{% extends 'base.html' %}
-{% load bootstrap_tags %}
-
-{% block content %}
-
-
+{% extends 'base.html' %} {% load bootstrap_tags %} {% block content %}
 <div id="add-artefact-container" class="center-block">
-	<div class="add-artefact">
-		<h1>Add Artefact:</h1>
-
-		<form name="add-artefact-form" onsubmit="return validateForm()" class="form-padding" method="POST" enctype="multipart/form-data">
-			<!-- give blank artefact form so user can save new artefact-->
+    <div class="add-artefact">
+        <h1>Add Artefact:</h1>
+        <form name="add-artefact-form" onsubmit="return validateForm()" class="form-padding" method="POST" enctype="multipart/form-data">
+            <!-- give blank artefact form so user can save new artefact-->
             {% csrf_token %} {{ form|as_bootstrap }}
             <button type="submit" class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-danger" onclick="exitPage()" >Exit</button>
-		</form>
-	</div><!-- add-artefact -->
-</div><!-- add-artefact-container -->
-
-
+            <button type="button" class="btn btn-danger" onclick="exitPage()">Exit</button>
+        </form>
+    </div>
+    <!-- add-artefact -->
+</div>
+<!-- add-artefact-container -->
 {% endblock %}

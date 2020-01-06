@@ -1,25 +1,23 @@
-{% extends "base.html" %}
-{% load bootstrap_tags %}
-{% block content %}
+{% extends "base.html" %} {% load bootstrap_tags %} {% block content %}
 
 <div class="edit-artefact-container">
-	<div class="row">
-		<div class="leftColumn">
-			<div class="card">
-				<form method="POST" enctype="multipart/form-data" class="form-padding">
+    <div class="row">
+        <div class="leftColumn">
+            <div class="card">
+                <form method="POST" enctype="multipart/form-data" class="form-padding">
                     <!-- Display the selected artefact to the staff user for editing
                         when selected from the cards.  Alow the to either save the changes
                         by clicking save or discard the changes by clicking exit.-->
-					{% csrf_token %} {{ form|as_bootstrap }}
-					<button type="submit" class="btn btn-success">Save</button>
-					<button type="button" class="btn btn-danger" onclick="exitPage()" >Exit</button>
-				</form>
-			</div>
-			<!--card-->
-		</div>
-		<!--leftColumn-->
-	</div>
-	<!--row-->
+                    {% csrf_token %} {{ form|as_bootstrap }}
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger" onclick="exitPage()">Exit</button>
+                </form>
+            </div>
+            <!--card-->
+        </div>
+        <!--leftColumn-->
+    </div>
+    <!--row-->
 </div>
 <!--edit-artefact-container-->
 {% endblock %}
