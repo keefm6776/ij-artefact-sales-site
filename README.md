@@ -145,38 +145,41 @@ Which are located in the Database & UI Design Folder.
 7.  A link to the logged in customer's profile: 
     * This allows the User to adjust their customer contact details that are used to pre-prepopulate the checkout details.
 
-8.  The Link to Log out:
+8.  A Link to Log out:
     * This allows the user to log out of their user area.
+
+9.  A Link to Previous Purchases:
+    * This allows the User to check the artefacts that they have previously purchased.
             
 
 **Seller (Once Logged In):**
     
-9.  Along the top menu the seller is able to filter the artefacts as to their current status:
+10.  Along the top menu the seller is able to filter the artefacts as to their current status:
         
-    a)  For Sale, the seller (as default) is presented with the artefacts that are currently for sale, newest first, so that he/she can manipulate this data:
+     a)  For Sale, the seller (as default) is presented with the artefacts that are currently for sale, newest first, so that he/she can manipulate this data:
 
-    * The seller can read the information that he/she has provided for the artefact.  
-    * The seller can edit the information that he/she has provided for the artefact.  
-    * The seller can delete the artefact from the database
+     * The seller can read the information that he/she has provided for the artefact.  
+     * The seller can edit the information that he/she has provided for the artefact.  
+     * The seller can delete the artefact from the database
             
-    b) Sold, the seller is presented with the artefacts that are sold, newest first, however they are now unable to edit and delete the information about the artefact:
+     b) Sold, the seller is presented with the artefacts that are sold, newest first, however they are now unable to edit and delete the information about the artefact:
 
-    * The seller can search these sold items as per feature 4.
-    * The Seller can still read the information that they have provided for the artefact.
-    * The seller can click the despatch button, this will provide them with a pdf of a despatch note and make the artefact as despatched.
+     * The seller can search these sold items as per feature 4.
+     * The Seller can still read the information that they have provided for the artefact.
+     * The seller can click the despatch button, this will provide them with a pdf of a despatch note and make the artefact as despatched.
 
-    c) Despatched, the seller is presented with the artefacts that are despatched, newest first, however they are now unable to edit and delete the information about the artefact:
+     c) Despatched, the seller is presented with the artefacts that are despatched, newest first, however they are now unable to edit and delete the information about the artefact:
 
-    * The seller can search these despatched items as per feature 4.
-    * The Seller can still read the information that they have provided for the artefact.
+     * The seller can search these despatched items as per feature 4.
+     * The Seller can still read the information that they have provided for the artefact.
 
-      NB.  Each of the above three operations are only available while the artefact is still for sale.
+       NB.  Each of the above three operations are only available while the artefact is still for sale.
 
-10. Also on the top menu is add, this when clicked presents the seller with a form that enables them to create a new artefact and all the information that can be provided.
+11. Also on the top menu is add, this when clicked presents the seller with a form that enables them to create a new artefact and all the information that can be provided.
 
-11. The seller can edit their own profile with the link provided to the right of the top navbar.
+12. The seller can edit their own profile with the link provided to the right of the top navbar.
 
-12. The seller can logout with the link provided to the right of the navbar.
+13. The seller can logout with the link provided to the right of the navbar.
 
 
 
@@ -203,9 +206,7 @@ Which are located in the Database & UI Design Folder.
     b) Django has allowed me to allocate users different status depending on who they are. i.e.
    * Superuser - I am the superuser who can access the admin panel and has access to the backend.
    * Staff     - This is the site owner, who is granted functionality related to listing and selling items.
-   * User      - This is the default level, which all customers are given    
-                                                            They are only able to see, buy or bid the artefacts and
-                                                            are not able to upload artefacts or make changes to them.
+   * User      - This is the default level, which all customers are given.  They are only able to see, buy or bid the artefacts and are not able to upload artefacts or make changes to them.
 
     c) The admin panel which allowed me to view and edit models etc.
     
@@ -228,7 +229,7 @@ Which are located in the Database & UI Design Folder.
 
 12. HEROKU          -   Used to deploy the project.
 
-13. TRAVIS CI       -   Travis Continuous Integration (CI) testing.  This maintained standards by running tests every time I pushed a new commit and reported the results to a pull request.
+13. TRAVIS CI       -   Travis Continuous Integration (CI) testing.  This maintained standards by running tests (including those defined by me) every time I pushed a new commit and reported the results to a pull request.
             
 14. AWS S3 Bucket   -   This allowed me to store my static files in the cloud so that they were available to my site at all times.
 
@@ -257,6 +258,22 @@ I have made regular Git Commits during my project for version control and also t
 			
 8.	For each subsequent commit I repeated steps 3, 4, 5 & 7.
 
+## Django
+
+Before starting my project I had to set up Django.  To do this I had to:
+
+1.  Create a new workspace in Gitpod and gave it an appropriate name.
+
+2.  In the Terminal window I then installed Django using the: 'Python3 pip install Django' command.
+
+3.  Once Django was installed I then created my project with the 'Django-admin startproject ecommerce .' command.  This created my project in the ecommerce directory.  (The dot at the end of the command is important and must be included.)
+
+4.  To allow this project to run locally I added 'localhost' to my ALLOWED_HOSTS list in the settings.py file in my ecommerce directory.
+
+5.  To run this project locally in GitPod I used the 'Python3 manage.py runserver' command.
+
+6.  This set up my Django framework where I was able to define all my urls, forms, tests, views etc for all the apps within my project.
+
 ## Static Files
 
 I used AWS buckets to store static files.  This includes:
@@ -265,6 +282,8 @@ I used AWS buckets to store static files.  This includes:
 2.  Images uploaded to display with the artefacts.
 3.  Javascript for Stripe and my custom javascript.
 4.  Font-Awesome CSS and Font Files.
+
+Each time I updated any of my static files, before running the app I had to run the following, 'python3 manage.py collectstatic' to update the static files in the AWS bucket.
 
 To create a bucket, I had to:
 
@@ -333,55 +352,92 @@ Once the bucket was created:
 24. Again, I gave a relevant name, ie 'ij-artefact-sales-user' and checked the 'Programmatic access' option.
 25. I then clicked the 'Next: Permissions' button, and selected my group ie 'ij-artefact-sales-group' and clicked the 'Next:tags' button
 26. No keys were required so I clicked the 'Next: Review' button, followed by the 'create user' button on the next screen.
-27. I then clicked the 'Download .csv' button.
-
-
-
-
-
-
-
-
-
+27. I then clicked the 'Download .csv' button.  Keeping this file for further reference if I ever needed these details in the future.
 
 ## Deployment
 
-I used Heroku to deploy this project by following the steps provided in the CodeInstitute course. 
-To initialise heroku, these were:
+I used Heroku to deploy this project by following the steps provided in the CodeInstitute course.  First of all I had to set myself up with a heroku account by signing up at heroku.com.
+Next I had to initialise heroku, by following these steps:
 
-1.	Create an app in heroku, which has an unique name. In my case ijones-artefact-sales
-			
-2.	Next login to heroku through the CLI, using the 'heroku login' and entering your heroku credentials.
-			
-3.  To link heroku to the git repository I used the following: 'heroku git:remote -a ijones-artefact-sales
-			
-4.	I then sent the command to get it up and running : heroku ps:scale web=1 For this project
+1.  Login to heroku through the CLI, using the 'heroku login' and entering my heroku credentials.
 
-In Heroku, I then set the following Config Variables:
+2.	Next I had to install the appropriate Django packages, as follows:
 
-1.	PORT = 5000
-2.  IP   = 0.0.0.0
+* gunicorn - using the command 'python3 pip install gunicorn', which allowed me to run the application on the server.
+* psycopg2 - using the command 'python3 pip install psycopg2', which allowed a connection to a Postgreql database.
+* I then had to use the command, 'python3 pip freeze --local > requirements.txt', which logged the required packages in my requirements.txt file.
+* I had to use the freeze command above, each time that a new package was installed, to make sure that Django knew that it was required to run the app.
+
+3.	After these setup steps, I was able to create my app in heroku, which had to have a unique name. In my case ijones-artefact-sales.  I did this using the command 'heroku create ijones-artefact-sales --region eu'
+
+4.  Next I set up my postgresql database using 'heroku addons:create heroku-postgresql:hobby-dev'.  This created a new empty database for my project.  I was able to find the connection configuation setting, in 'Config Vars' in the heroku.com dashboard.
+
+5.  Next I had to install the package to allow me to parse database urls.  Using the command, 'python3 pip install dj_database_url'.  After this I had to update my requirements.txt file using the 'python3 pip freeze --local > requirements.txt' command.
+
+6.  To allow this to work I then went to my settings.py file again and included 'import dj_database_url' at the top of the file, along with:
+* if "DATABASE_URL" in os.environ:
+      DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+  else:
+      print("Database URL not found. Using SQLite instead")
+      DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
+      }
+* The above code would run postgresql when it was available, taking the DATABASE_URL from my heroku CONFIG VARS.  However when this was unavailable it would connect to the default SQLite3 instead.
+
+7.  Once this was saved I went back to the terminal and ran the command 'python3 manage.py runsever', to migrate all the current database structure to my new postgresql database which had just been connected.
+
+8.  Once this was done I followed the procedure to push these changes to git, as described above.
+
+9.  Before my first deployment I had to change a setting by using the command, 'heroku config:set DISABLE_COLLECTSTATIC=1', this turns off the collecting of Static files.
+
+10. Before my first deployment I also needed to create a Procfile, which tells Heroku how to run the application.  I did this by running the command 'echo web gunicorn ecommerce.wsgi:application > Procfile'
+
+11. To allow this deployed version of the app to run, I had to add 'ijones-artefact-sales.herokuapp.com' to my list of ALLOWED_HOSTS in my settings.py file.
+
+12. Once again this had to be pushed to git, as described above.
+
+13. To push these changes to heroku, I used the command 'git push heroku master', to enact a first deployment.
+
+14. So that I din't have to keep pushing our app to git and heroku each time, I went to the Heroku dashboard and clicked the Deploy tab.  I then chose the 'GitHub' deployment method, and clicked on the 'Connect to GitHub' button.  This signed me in and I was able to search for the relevant repoitory, once found I clicked the 'Connect' button.  Connecting to the repository and setting up an automatic push to Heroku whenever new code was pushed to GitHub.
+
+15. Next, I set up the following Config Variables in Heroku:
+
+*  PORT = 5000
+*  IP   = 0.0.0.0
 
 Along with:
 
-3.  STRIPE_PUBLISHABLE Key
-4.  STRIPE_SECRET Key
-5.  DATABASE_URL for postgres
-6.  SECRET_KEY
-7.  AWS_ACCESS_KEY_ID       -   For S3 Bucket
-8.  AWS_SECRET_ACCESS_KEY   -   For S3 Bucket
+*  STRIPE_PUBLISHABLE Key
+*  STRIPE_SECRET Key
+*  DATABASE_URL for postgres
+*  SECRET_KEY for Django
+*  AWS_ACCESS_KEY_ID       -   For S3 Bucket
+*  AWS_SECRET_ACCESS_KEY   -   For S3 Bucket 
 
-Also in Heroku I have set up the deployment method o be done via GitHub, and enabled automtic deployments when a new version is pushed to the master branch.  However deployment will not go ahead until the Travis-CI tests have passed.
+16.  To access these Config Variables I used the 'os.environ.get('')' command in the appropriate setting in my settings.py file, referencing the config variable by the name mentioned above.
+			
+17.	I then sent the command to get it up and running : heroku ps:scale web=1 For this project
+
+18. To allow the project to run locally and access the required database, buckets etc, I also created a local copy of these config variabled in a file called env.py, which is not being committed to Git/Github.
+
+NB. Deployment will not go ahead until the Travis-CI tests have passed.
             
-I have also a local copy of these in a file called env.py, which is not being committed to Git/Github that allows me to run my project locally.
-
-I was then able to open the app, using the Open App button in Heroku.
+Once the deployed version was in place, I was then able to open the app, using the Open App button in Heroku.
 
 Before the final deployment of this project, I have set the debug variable to false in settings.py.
 
 This project has been deployed via Heroku at : https://ijones-artefact-sales.herokuapp.com/
 
 My Site Files and other supporting Files can be found at: https://github.com/keefm6776/ij-artefact-sales-site
+
+My development version and my deployed version differ in the following ways:
+
+1.  The development version stores the configuration variables in a local file called 'env.py', which is imported in the settings.py file.  The deployed version accesses this files in Heroku and has to have the import for env.py removed before running.
+
+2.  The development version is run by typing 'python3 manage.py runserver' into the Gitpod terminal, whereas the deployed version is run by clicking on the 'Open App' button in the dashboard.
 
 ## Testing
 Each new feature had been tested after each stage of development within the GITPOD environment. This has included:
@@ -497,14 +553,14 @@ Naturally, you can register yourself as a User to check the selling end of the s
 
 ## Code Validation:
 
-I have validated my site with W3C validation tools:
-
-1. For HTML, I have managed to eliminate any errors in the validation tool, with the exception of Errors arising from:
+1. For HTML, I have validated my code using the W3C validator and I have managed to eliminate any errors in the validation tool, with the exception of Errors arising from:
 
     * Extending base.html (ie no DOCTYPE or language declaration etc)
     * Use of templating syntax.
 
-2. For CSS, I have managed to eliminate any validation errors in my CSS as per the validation tool.
+2. For CSS, I have validated my code using the W3C validator and I have managed to eliminate any validation errors in my CSS as per the validation tool.
+
+3. For Python, I have used a PEP8 Formatting Tool to ensure that my code is formatted correctly as well as checking the syntax with the syntax checker at infoheap.com.
 
 
 ## Content

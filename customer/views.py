@@ -35,7 +35,7 @@ def customer_profile(request):
                 (customer_form.cleaned_data["phone_number"] != '')):
                 user_form.save()
                 customer_form.save()
-                messages.success(request, _('Your Profile was
+                messages.success(request, _('Your Profile was\
                                  successfully updated!'))
                 return redirect('settings:profile')
         else:

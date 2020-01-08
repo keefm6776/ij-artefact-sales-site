@@ -32,7 +32,7 @@ def make_bid(request, pk):
         """if the form input is valid"""
         if form.is_valid():
             """if the bid made is greater than the current one"""
-            if (form.cleaned_data["bid"] > highest_bid) and
+            if (form.cleaned_data["bid"] > highest_bid) and\
             (form.cleaned_data["bid"] > 0):
                 """save the new highest bid with the customer"""
                 """and artefact info"""
