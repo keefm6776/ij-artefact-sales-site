@@ -8,36 +8,48 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-# Extending User Model with Customer Model adapted from code at Simpleisbetterthancomplex.com
+""" Extending User Model with Customer Model adapted from code """
+""" at Simpleisbetterthancomplex.com """
+
+
 @login_required
 @transaction.atomic
 def customer_profile(request):
     if request.method == 'POST':
-        """create forms for user and customer, prefilled with current user info"""
-        user_form = UserRegistrationForm(request.POST, instance=request.user)
-        customer_form = CustomerForm(request.POST, instance=request.user.customer)
+        """create forms for user and customer, """
+        """prefilled with current user info"""
+        user_form = UserRegistrationForm(request.POST,
+                                         instance=request.user)
+        customer_form = CustomerForm(request.POST,
+                                     instance=request.user.customer)
 
         """If user and customer info valid after editing, update/save infor"""
-        if (user_form.is_valid() and customer_form.is_valid() and (customer_form.cleaned_data["full_name"] != '') 
-            and (customer_form.cleaned_data["street_Address1"] != '') and (customer_form.cleaned_data["street_Address2"] != '') 
-            and (customer_form.cleaned_data["town_or_city"] != '') and (customer_form.cleaned_data["county"] != '') 
-            and (customer_form.cleaned_data["country"] != '') and (customer_form.cleaned_data["postcode"] != '') 
-            and (customer_form.cleaned_data["phone_number"] != '')):
-            user_form.save()
-            customer_form.save()
-            messages.success(request, _('Your Profile was successfully updated!'))
-            return redirect('settings:profile')
+        if (user_form.is_valid() and customer_form.is_valid() and
+                (customer_form.cleaned_data["full_name"] != '') and
+                (customer_form.cleaned_data["street_Address1"] != '') and
+                (customer_form.cleaned_data["street_Address2"] != '') and
+                (customer_form.cleaned_data["town_or_city"] != '') and
+                (customer_form.cleaned_data["county"] != '') and
+                (customer_form.cleaned_data["country"] != '') and
+                (customer_form.cleaned_data["postcode"] != '') and
+                (customer_form.cleaned_data["phone_number"] != '')):
+                user_form.save()
+                customer_form.save()
+                messages.success(request, _('Your Profile was
+                                 successfully updated!'))
+                return redirect('settings:profile')
         else:
             """ If user/customer form not valid, prompt user"""
             if (form.cleaned_data["name"] == ''):
-                messages.error(request, ('Please correct the error below.'))                  
+                messages.error(request, ('Please correct the error below.'))
     else:
-        """create forms for user and customer, prefilled with current user info"""
+        """create forms for user and customer, """
+        """prefilled with current user info"""
         user_form = UserRegistrationForm(instance=request.user)
         customer_form = CustomerForm(instance=request.user.customer)
-        
+
     """redisplay profile, with updated user/customer info"""
     return render(request, 'profiles/profile.html', {
-        'user_form' : user_form,
-        'customer_form' : customer_form
+        'user_form': user_form,
+        'customer_form': customer_form
     })

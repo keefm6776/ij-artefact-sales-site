@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, reverse
 
 """ Cart Views from Code institute notes """
 
+
 def view_cart(request):
     """A View that renders the cart contents page"""
     return render(request, "cart.html")
+
 
 def add_to_cart(request, id):
     """Only add 1 of item to the cart, as they are unique items"""
