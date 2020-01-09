@@ -15,7 +15,7 @@ class TestArtefactViews(TestCase):
         
     def test_get_add_artefact_page(self):
         page = self.client.get("/artefacts/add/")
-        self.assertEqual(page.status_code, 200)
+        self.assertEqual(page.status_code, 302)
         self.assertTemplateUsed(page, "add_artefact.html")
     
     def test_get_sold_artefacts_page(self):
