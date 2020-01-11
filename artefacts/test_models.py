@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Artefact
 
+
 class ArtefactTests(TestCase):
     """ Tests to run against our Artefact Models """
 

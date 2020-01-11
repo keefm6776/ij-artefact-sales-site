@@ -4,6 +4,7 @@ from customer.models import Customer
 
 # Adapted from Course Instiute Notes
 
+
 class Order(models.Model):
     date = models.DateField()
     delivery_full_name = models.CharField(max_length=60, blank=False)
@@ -28,4 +29,3 @@ class OrderLineItem(models.Model):
 
     def __str__(self):
         return str(self.order)
-        

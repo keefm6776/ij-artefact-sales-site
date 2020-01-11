@@ -1,9 +1,10 @@
 from django.test import TestCase
 from .forms import MakePaymentForm, OrderForm
 
+
 class TestMakePaymentForm(TestCase):
 
-# Test that form cannot be created with incomplete information
+    # Test that form cannot be created with incomplete information
 
     def test_cannot_process_payment_with_just_a_card_number(self):
         form = MakePaymentForm({'credit_card_number': '4242424242424242'})

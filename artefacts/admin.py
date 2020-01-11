@@ -12,4 +12,3 @@ from customer.models import Customer
 
 admin.site.register(Artefact)
 admin.site.register(Customer)
-

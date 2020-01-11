@@ -118,7 +118,7 @@ def add_artefact(request):
                     form.add_error(None, "The era can only be AD (Anno Domini)\
                                           or BC (Before Christ)!")
 
-    else:
+        else:
             form = ArtefactForm()
             return redirect(for_sale_artefacts)
     return render(request, "add_artefact.html", {'form': form})
