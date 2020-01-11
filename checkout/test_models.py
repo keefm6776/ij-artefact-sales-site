@@ -12,20 +12,20 @@ class OrderTests(TestCase):
         self.assertEqual(test_date.date, today)
 
     def test_delivery_full_name_ok(self):
-        test_delivery_full_name = Order(delivery_full_name='
-                                        Pippy Longstockings')
+        test_delivery_full_name = Order(delivery_full_name=
+                                        'Pippy Longstockings')
         self.assertEqual(str(test_delivery_full_name.delivery_full_name),
                          'Pippy Longstockings')
 
     def test_delivery_street_address1(self):
-        test_delivery_street_address1 = Order(delivery_street_address1='
-                                              12 Any Avenue')
+        test_delivery_street_address1 = Order(delivery_street_address1=
+                                              '12 Any Avenue')
         self.assertEqual(str(test_delivery_street_address1.
                              delivery_street_address1), '12 Any Avenue')
 
     def test_delivery_street_address2(self):
-        test_delivery_street_address2 = Order(delivery_street_address2='
-                                              Any Area')
+        test_delivery_street_address2 = Order(delivery_street_address2=
+                                              'Any Area')
         self.assertEqual(str(test_delivery_street_address2.
                          delivery_street_address2), 'Any Area')
 
@@ -78,3 +78,4 @@ class OrderLineItemTests(TestCase):
     def test_quantity_ok(self):
         test_quantity = OrderLineItem(quantity=2)
         self.assertEqual(test_quantity.quantity, 2)
+
