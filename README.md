@@ -28,10 +28,9 @@ Build an auction place to sell historical artifacts, with the following goals:
 2.  Site owner's goal:      Earn money on selling the artifacts (the site owner is the seller)
     Potential features to include:
 
-    * Create an online store focused on selling unique historical artefacts,
-        such as The Holy Grail to the highest bidder.
+    - Create an online store focused on selling unique historical artefacts, such as The Holy Grail to the highest bidder.
 
-    * Allow users to search for artefacts based on various fields.
+    - Allow users to search for artefacts based on various fields.
 
 3.  Allow users to see the price, image and other basic details about an artefact.
 
@@ -117,39 +116,39 @@ Which are located in the Database & UI Design Folder.
 
 **Buyer (Once Logged In):**
 
-3. The buyer is presented with the artefacts that are currently for sale, newest first, so that he/she can view an image of the artefact, read up on its history and read any other description that the seller has provided.
+3. The buyer is presented with the artefacts that are currently for sale, latest listing first, so that he/she can view an image of the artefact, read up on its history and read any other description that the seller has provided.
 
 4. There is a search bar to be able to filter the artefacts by:
-    * Name
-    * A range of centuries
-    * The era of the item (ie BC or AD)
+    - Name
+    - A range of centuries
+    - The era of the item (ie BC or AD)
             
 5. On each artefact panel there is:
-    * The option to add the artefact to the cart.
-    * Read more, which presents the history and description of the item to the user.
-    * Go to the bidding page for this item.
+    - The option to add the artefact to the cart.
+    - Read more, which presents the history and description of the item to the user.
+    - Go to the bidding page for this item.
 
 6. A link to the cart: 
             
     a) Once in the cart:
-    * They can view the items that they have added to the cart.
-    * For Each Item they can set the required number back to zero, removing it from the cart.
-    * They can still re-read the history/description of the item.
-    * They can choose to checkout their selected artefacts.
+    - They can view the items that they have added to the cart.
+    - For Each Item they can set the required number back to zero, removing it from the cart.
+    - They can still re-read the history/description of the item.
+    - They can choose to checkout their selected artefacts.
 
     b) Once having chosen the checkout:
-    * They can check their contact/billing details are correct, or recitfy them
-    * Provide the card number that they wish to pay with, but it must be the billing address of the card, as the details entered are sent to Stripe.
-    * On having paid for the artefact(s), they are returned to the list of artefacts that are still for sale.  (The ones that have just been bought are marked as sold)
+    - They can check their contact/billing details are correct, or recitfy them
+    - Provide the card number that they wish to pay with, but it must be the billing address of the card, as the details entered are sent to Stripe.
+    - On having paid for the artefact(s), they are returned to the list of artefacts that are still for sale.  (The ones that have just been bought are marked as sold)
 
 7.  A link to the logged in customer's profile: 
-    * This allows the User to adjust their customer contact details that are used to pre-prepopulate the checkout details.
+    - This allows the User to adjust their customer contact details that are used to pre-prepopulate the checkout details.
 
 8.  A Link to Log out:
-    * This allows the user to log out of their user area.
+    - This allows the user to log out of their user area.
 
 9.  A Link to Previous Purchases:
-    * This allows the User to check the artefacts that they have previously purchased.
+    - This allows the User to check the artefacts that they have previously purchased.
             
 
 **Seller (Once Logged In):**
@@ -158,22 +157,22 @@ Which are located in the Database & UI Design Folder.
         
      a)  For Sale, the seller (as default) is presented with the artefacts that are currently for sale, newest first, so that he/she can manipulate this data:
 
-     * The seller can read the information that he/she has provided for the artefact.  
-     * The seller can edit the information that he/she has provided for the artefact.  
-     * The seller can delete the artefact from the database
+     - The seller can search these items as per feature 4.
+     - The seller can read the information that he/she has provided for the artefact.  
+     - The seller can edit the information that he/she has provided for the artefact.  
+     - The seller can delete the artefact from the database
             
      b) Sold, the seller is presented with the artefacts that are sold, newest first, however they are now unable to edit and delete the information about the artefact:
 
-     * The seller can search these sold items as per feature 4.
-     * The Seller can still read the information that they have provided for the artefact.
-     * The seller can click the despatch button, this will provide them with a pdf of a despatch note and make the artefact as despatched.
+     - The seller can search these sold items as per feature 4.
+     - The Seller can still read the information that they have provided for the artefact.
+     - The seller can click the despatch button, this will provide them with a pdf of a despatch note and make the artefact as despatched.
 
      c) Despatched, the seller is presented with the artefacts that are despatched, newest first, however they are now unable to edit and delete the information about the artefact:
 
      * The seller can search these despatched items as per feature 4.
      * The Seller can still read the information that they have provided for the artefact.
 
-       NB.  Each of the above three operations are only available while the artefact is still for sale.
 
 11. Also on the top menu is add, this when clicked presents the seller with a form that enables them to create a new artefact and all the information that can be provided.
 
@@ -204,9 +203,9 @@ Which are located in the Database & UI Design Folder.
     a) The security and feature of logging in and logging out from the site.  
     
     b) Django has allowed me to allocate users different status depending on who they are. i.e.
-   * Superuser - I am the superuser who can access the admin panel and has access to the backend.
-   * Staff     - This is the site owner, who is granted functionality related to listing and selling items.
-   * User      - This is the default level, which all customers are given.  They are only able to see, buy or bid the artefacts and are not able to upload artefacts or make changes to them.
+    - Superuser - I am the superuser who can access the admin panel and has access to the backend.
+    - Staff     - This is the site owner, who is granted functionality related to listing and selling items.
+    - User      - This is the default level, which all customers are given.  They are only able to see, buy or bid the artefacts and are not able to upload artefacts or make changes to them.
 
     c) The admin panel which allowed me to view and edit models etc.
     
@@ -214,10 +213,10 @@ Which are located in the Database & UI Design Folder.
 
 7.	BOOTSTRAP       -	I used Bootstrap to enhance the base HTML for my site, this allowed me to have  extras when developing.  I was provided with:
                                         
-    * Navbar and responsiveness between large and small devices.
-    * The pagination for listing pages.  
-    * The grid feature for responsiveness between screen sizes.
-    * Positional commands to allow easy centering of divs and menus, as well as being able to position them to the left and right.
+    - Navbar and responsiveness between large and small devices.
+    - The pagination for listing pages.  
+    - The grid feature for responsiveness between screen sizes.
+    - Positional commands to allow easy centering of divs and menus, as well as being able to position them to the left and right.
 
 8. POSTGRES         -   Postgres (via Heroku) as the relational databse to keep all the information required for this project to run and provide all the functionailty of an SQL database.
             
@@ -290,7 +289,7 @@ To create a bucket, I had to:
 1.  Create an account with aws.amazon.com.
 2.  In the find services search box, I searched for S3 (Scalable storage in the cloud)
 3.  Once in S3 buckets I clicked the blue "Create Bucket" Button.
-4.  I gave my bucket a unique name and selected the region closest to me ie EU (Ireland), and clieked next.
+4.  I gave my bucket a unique name and selected the region closest to me ie EU (Ireland), and clicked next.
 5.  On the next page as there is nothing that I needed to change, so I just clicked next.
 6.  On this page I unchecked the "Block all public access" option and clicked next.
 7.  I then clicked create bucket.
@@ -339,7 +338,7 @@ Once the bucket was created:
 13. For step two, I just clicked the 'next' button.
 14. For step three, I just clicked the 'create group' button.
 15. Next I clicked 'policies' from the left hand menu, and then selected the 'JSON' tab.
-16. Next I clikced the 'import managed policy' link at the top right of the editor.
+16. Next I clicked the 'import managed policy' link at the top right of the editor.
 17. I searched for S3 and selected the 'AmazonS3FullAccess' policy.
 18. This inputted a generic policy and I replace the "*" for "Resource" with a list, which was 
     my ARN from before followed by a comma, then this ARN again followed by '/*' ie [ARN, ARN/*]
@@ -363,10 +362,10 @@ Next I had to initialise heroku, by following these steps:
 
 2.	Next I had to install the appropriate Django packages, as follows:
 
-* gunicorn - using the command 'python3 pip install gunicorn', which allowed me to run the application on the server.
-* psycopg2 - using the command 'python3 pip install psycopg2', which allowed a connection to a Postgreql database.
-* I then had to use the command, 'python3 pip freeze --local > requirements.txt', which logged the required packages in my requirements.txt file.
-* I had to use the freeze command above, each time that a new package was installed, to make sure that Django knew that it was required to run the app.
+- gunicorn - using the command 'python3 pip install gunicorn', which allowed me to run the application on the server.
+- psycopg2 - using the command 'python3 pip install psycopg2', which allowed a connection to a Postgreql database.
+- I then had to use the command, 'python3 pip freeze --local > requirements.txt', which logged the required packages in my requirements.txt file.
+- I had to use the freeze command above, each time that a new package was installed, to make sure that Django knew that it was required to run the app.
 
 3.	After these setup steps, I was able to create my app in heroku, which had to have a unique name. In my case ijones-artefact-sales.  I did this using the command 'heroku create ijones-artefact-sales --region eu'
 
@@ -375,7 +374,7 @@ Next I had to initialise heroku, by following these steps:
 5.  Next I had to install the package to allow me to parse database urls.  Using the command, 'python3 pip install dj_database_url'.  After this I had to update my requirements.txt file using the 'python3 pip freeze --local > requirements.txt' command.
 
 6.  To allow this to work I then went to my settings.py file again and included 'import dj_database_url' at the top of the file, along with:
-* if "DATABASE_URL" in os.environ:
+- if "DATABASE_URL" in os.environ:
       DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
   else:
       print("Database URL not found. Using SQLite instead")
@@ -385,7 +384,7 @@ Next I had to initialise heroku, by following these steps:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
             }
       }
-* The above code would run postgresql when it was available, taking the DATABASE_URL from my heroku CONFIG VARS.  However when this was unavailable it would connect to the default SQLite3 instead.
+- The above code would run postgresql when it was available, taking the DATABASE_URL from my heroku CONFIG VARS.  However when this was unavailable it would connect to the default SQLite3 instead.
 
 7.  Once this was saved I went back to the terminal and ran the command 'python3 manage.py runsever', to migrate all the current database structure to my new postgresql database which had just been connected.
 
@@ -408,7 +407,7 @@ Next I had to initialise heroku, by following these steps:
 *  PORT = 5000
 *  IP   = 0.0.0.0
 
-Along with:
+Along the following keys, which were all provided by the sites which I was connecting to:
 
 *  STRIPE_PUBLISHABLE Key
 *  STRIPE_SECRET Key
@@ -427,11 +426,11 @@ NB. Deployment will not go ahead until the Travis-CI tests have passed.
             
 Once the deployed version was in place, I was then able to open the app, using the Open App button in Heroku.
 
-Before the final deployment of this project, I have set the debug variable to false in settings.py.
-
 This project has been deployed via Heroku at : https://ijones-artefact-sales.herokuapp.com/
 
 My Site Files and other supporting Files can be found at: https://github.com/keefm6776/ij-artefact-sales-site
+
+## Development vs Deployed version
 
 My development version and my deployed version differ in the following ways:
 
@@ -439,21 +438,21 @@ My development version and my deployed version differ in the following ways:
 
 2.  The development version is run by typing 'python3 manage.py runserver' into the Gitpod terminal, whereas the deployed version is run by clicking on the 'Open App' button in the dashboard.
 
+3.  The development version has Debug set to True, so that I was able to debug any errors that cropped up.  This has been set to False for the production version.
+
+
 ## Testing
 Each new feature had been tested after each stage of development within the GITPOD environment. This has included:
 
 **Manual Testing:**
 
-I have used the site completing each path that can be followed by a user throught the cart and 
-checkout and I have also manually tested each link on the site.
+I have used the site completing each path that can be followed by a user throught the cart and checkout and I have also manually tested each link on the site.
 
 **Automated Testing:**
 
 Using Travis-ci:
 
-By linking my GitHub reppository for this project to travis-ci.org, I have been able to check out 
-the relevant branch and run the commands specified in .travis.yml, building the software and running
-any automated tests.
+By linking my GitHub reppository for this project to travis-ci.org, I have been able to check out the relevant branch and run the commands specified in .travis.yml, building the software and running any automated tests.
 
 Using the Django testing suite I have:
 
@@ -490,8 +489,7 @@ I have covered all the main browsers on the Windows 10 platform with this testin
 
 I found the following issue with responsiveness:
 
-1.  When in portrait mode on the tablet screen, the first panel on the second line does not render,
-    and is tagged to the end of the list.  This does not happen on any other screen mobile or pc.
+1.  When in portrait mode on the tablet screen, the first artefact panel on the second line does not render, and is tagged to the end of the list.  This does not happen on any other screen mobile or pc.
 
 Other than the above issue, I have found that the tested screens were all responsive to orientation when 
 applicable, and the site ran as expected in all these scenarios. 
@@ -542,12 +540,11 @@ I was unable to test Internet Explorer because it would not run on my Windows 10
 
 **Manual Testing:**
 
-1. Any artefact can be added via the admin panel or by a staff user via the app.  However when using the app I had to remove the image field from the addition because this was causing an error and was not uploading the image.  I have had assitance from a few tutors and was unable to find why this did not upload the file to my S3 bucket, especially considering it worked 
-correctly from the admin panel.  This has meant that I have added the default site image to add as the image for any artefact that has been added via the app that has not image.
+1. Any artefact can be added via the admin panel or by a staff user via the app.  However when using the app I had to remove the image field from the addition because this was causing an error and was not uploading the image.  I have had assitance from a few tutors and was unable to find why this did not upload the file to my S3 bucket, especially considering it worked correctly from the admin panel.  This has meant that I have added the default site image to add as the image for any artefact that has been added via the app that has not image.
         
 2. On small screens, the artefact listings are very narrow.  I tried a number of ways to recitfy this but was unable to do so in a satisfactory way.
 
-3. On my final round of manual testing, I found that the despatch button was displayed for all users on items that were still for sale.  I had clearly accidently caused this issue while rectifying another issue, because this was new.  I put
+3. On my final round of manual testing, I found that the despatch button was displayed for all users on items that were still for sale.  I had clearly accidently caused this issue while rectifying another issue, because this was new.  I rectified this by change the title to the correct one, and reinstating the relevant buttons for this page, that were specific to the type of user.
 
 
 ## Examination
