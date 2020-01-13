@@ -488,7 +488,13 @@ I have covered all the main browsers on the Windows 10 platform with this testin
 * MS Edge 42.17134.1.0, 
 * Opera 60.0.3255.56
 
-I have found that they were all responsive to orientation when applicable, and the site ran as expected in all these scenarios. 
+I found the following issue with responsiveness:
+
+1.  When in portrait mode on the tablet screen, the first panel on the second line does not render,
+    and is tagged to the end of the list.  This does not happen on any other screen mobile or pc.
+
+Other than the above issue, I have found that the tested screens were all responsive to orientation when 
+applicable, and the site ran as expected in all these scenarios. 
 
 I was unable to test Internet Explorer because it would not run on my Windows 10 computer, but I am not particularly concerned as this has a very low market share from between 3-4% from the stats quoted on Wikipedia. At this stage this share would only be decreasing with desktop computers being on the decline and Windows 10 taking over this market with MS Edge.
 
@@ -539,7 +545,9 @@ I was unable to test Internet Explorer because it would not run on my Windows 10
 1. Any artefact can be added via the admin panel or by a staff user via the app.  However when using the app I had to remove the image field from the addition because this was causing an error and was not uploading the image.  I have had assitance from a few tutors and was unable to find why this did not upload the file to my S3 bucket, especially considering it worked 
 correctly from the admin panel.  This has meant that I have added the default site image to add as the image for any artefact that has been added via the app that has not image.
         
-2. On small screens, the artefact listings are very narrow.  I tried a number of ways to recitfy this but was unable to do so in a satidfactory way.
+2. On small screens, the artefact listings are very narrow.  I tried a number of ways to recitfy this but was unable to do so in a satisfactory way.
+
+3. On my final round of manual testing, I found that the despatch button was displayed for all users on items that were still for sale.  I had clearly accidently caused this issue while rectifying another issue, because this was new.  I put
 
 
 ## Examination

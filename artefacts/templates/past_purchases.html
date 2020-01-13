@@ -19,11 +19,9 @@
                 <h3>{{ artefact.name|truncatewords:4 }}</h3>
             </div>
 
-            <div class="artefact-description">
-                <p>{{ artefact.description|truncatewords:7 }}</p>
+            <p class="artefact-description">{{ artefact.description|truncatewords:7 }}</p>
             <!--Display the first 7 words of artefact description-->
             <p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
-            </div>
             <p>
                 <!--display artefact price-->
                 <h3> Price Paid: € {{ artefact.price }}</h3>

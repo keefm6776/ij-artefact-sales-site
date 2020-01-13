@@ -34,7 +34,7 @@
 </div>
 <!--ArtefactSearch-Container-->
 
-<h2>Sold Artefacts:</h2>
+<h2>Artefacts For Sale:</h2>
 
 <div class="row row-flex">
     <!--Display artefacts returned by sold_artefacts view-->
@@ -58,13 +58,33 @@
             <!--allow user to read the full detail of the artefact by clicking 'Read More'-->
             <p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
             <!--display artefact price-->
-            <p>
-                <h3>€ {{ artefact.price }}</h3>
-            </p>
+            <p><h4>Buy Now: </h4></p>
+            <p><h3>€ {{ artefact.price }}</h3></p>
+            
+            {% if user.is_staff %}
+            <!--If User is a member of staff give them the option to edit 
+            or delete this the selected artefact once it is still for sale.-->
+			<p><a href="{% url 'edit_artefact_detail' artefact.id %}" class="btn btn-info">Edit</a></p>
+			<p><a href="{% url 'delete_artefact' artefact.id %}" class="btn btn-danger">Delete</a></p>
 
-            <!-- despatch item by clicking Despatch button, marking it as despatched and -->
-            <!-- creating a despatch note which is displayed/saved as a pdf file-->
-            <p><a href="{% url 'despatch_artefact' artefact.id %}" class="btn btn-success">Despatch</a></p>
+			{% else %}
+            <!--If User is a customer only allow them to add 1 item to the cart (As they are unique)
+            and hence purchase if they wish.-->
+			<form method="post" action="{% url 'add_to_cart' artefact.id %}">
+				{% csrf_token %}
+				<div class="input-group">
+					<input name="quantity" type="number" min="0" max="1" class="form-control" placeholder="Quantity">
+					<span class="input-group-btn">
+                            <button class="btn btn-success" type="submit">Add</button>
+                        </span>
+				</div>
+				<!--input-group-->
+				<h5>NB, Artefacts Are unique, So Only One Can Be Added.</h5>
+				<h3>Or</h3>
+                <!--If User is a customer only allow them to bid on this item-->
+				<p><a href="{% url 'make_bid' artefact.id %}" class="btn btn-primary">Bid</a></p>
+			</form>
+			{% endif %}
 
         </div>
         <!--panel-body-->
