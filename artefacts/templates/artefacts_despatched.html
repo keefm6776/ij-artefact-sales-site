@@ -48,11 +48,12 @@
             <img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" /> {%endif%}
 
             <div id="artefact-name-container">
-                <!--display artefact name, first 7 words of its description-->
-                <h3>{{ artefact.name }}</h3>
+                <!--display artefact name-->
+                <h3>{{ artefact.name|truncatewords:4 }}</h3>
             </div>
 
             <p class="artefact-description">{{ artefact.description|truncatewords:7 }}</p>
+            <!-- Display the first 7 words of the description-->
             <!--allow user to read the full detail of the artefact by clicking 'Read More'-->
             <p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
             <!--display artefact price-->

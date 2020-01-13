@@ -14,16 +14,19 @@
             <!--If artefact does not have an image, display site dummy image-->
             <img class="artefact-image" src="{% static 'images/indiana-collection.jpg' %}" alt="Indiana Collection" /> {%endif%}
 
-            <!--display artefact name, first 10 words of its description-->
+            <!--display artefact name-->
             <div class="artefact-name-container">
-                <h3>{{ artefact.name }}</h3>
+                <h3>{{ artefact.name|truncatewords:4 }}</h3>
             </div>
 
-            <p class="artefact-description">{{ artefact.description|truncatewords:10 }}</p>
+            <div class="artefact-description">
+                <p>{{ artefact.description|truncatewords:7 }}</p>
+            <!--Display the first 7 words of artefact description-->
             <p><a href="{% url 'artefact_detail' artefact.id %}" class="btn btn-default">Read more</a></p>
+            </div>
             <p>
                 <!--display artefact price-->
-                <h3> PRICE PAID: € {{ artefact.price }}</h3>
+                <h3> Price Paid: € {{ artefact.price }}</h3>
             </p>
 
         </div>
